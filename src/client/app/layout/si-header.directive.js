@@ -3,19 +3,17 @@
 
 	angular
 		.module('app.layout')
-		.directive('htTopNav', htTopNav);
+		.directive('siHeader', siHeader);
 
 	/* @ngInject */
-	function htTopNav() {
+	function siHeader() {
 		var directive = {
 			bindToController: true,
 			controller: TopNavController,
 			controllerAs: 'vm',
 			restrict: 'EA',
-			scope: {
-				'navline': '='
-			},
-			templateUrl: 'app/layout/ht-top-nav.html'
+			scope: {},
+			templateUrl: 'app/layout/si-header.html'
 		};
 
 		/* @ngInject */
