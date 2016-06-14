@@ -6,6 +6,7 @@
 			'app.core',
 			'app.widgets',
 			'app.dashboard',
+			'app.question',
 			'app.layout'
 		])
 		// TODO - Need to move to seprate config file.
