@@ -1,12 +1,15 @@
-<md-content>
-	<section layout="row" layout-wrap>
-		<md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
-		<md-button ng-disabled="true" class="md-primary">Disabled</md-button>
-	</section>
-	<section layout="row" layout-wrap>
-		<md-button class="md-raised">Button</md-button>
-		<md-button class="md-raised md-primary">Primary</md-button>
-		<md-button ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
-		<md-button class="md-raised md-warn">Warn</md-button>
-	</section>
-</md-content>
+<div class="md-padding" layout="row" layout-align="center">
+	<md-content>
+		<div>
+			<p>
+				A panel can be used to create dialogs, menus, and other overlays.
+			</p>
+			<h2>Options</h2>
+			<div layout="row">
+				<div flex="33">
+					<md-checkbox ng-model="ctrl.disableParentScroll">Disable Parent Scroll</md-checkbox>
+				</div>
+			</div>
+		</div>
+	</md-content>
+</div>
