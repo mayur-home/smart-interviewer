@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('app.question')
+		.module('admin.question')
 		.run(appRun);
 
 	appRun.$inject = ['routerHelper'];

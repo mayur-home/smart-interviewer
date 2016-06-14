@@ -1,3 +1,32 @@
-<div>
-	<h2>Question</h2>
+<div layout="row" layout-align="center">
+	<md-content flex="90">
+		<form name="questionMasterForm">
+			<md-input-container class="md-block">
+				<label>What's your question?</label>
+				<input name="question" type="text" ng-model="vm.questionMaster.question">
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Question Type</label>
+				<md-select ng-model="vm.questionMaster.type">
+					<md-option ng-repeat="type in vm.questionType" value="{{type}}">
+						{{type}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Weightage</label>
+				<md-select ng-model="vm.questionMaster.weightage">
+					<md-option ng-repeat="item in vm.weightage" value="{{item.value}}">
+						{{item.text}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Ideal Timing</label>
+				<input type="number" ng-model="vm.questionMaster.idealTiming">
+			</md-input-container>
+			<md-button class="md-raised md-primary"
+					ng-click="vm.submit()">Save Your Question!</md-button>
+		</form>
+	</md-content>
 </div>

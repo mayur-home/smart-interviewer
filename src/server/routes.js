@@ -3,7 +3,8 @@
 var router = require('express').Router();
 
 var routes = [
-	'./modules/user/user.route'
+	'./modules/user/user.route',
+	'./modules/question/question.route'
 ];
 
 for (var index in routes) {

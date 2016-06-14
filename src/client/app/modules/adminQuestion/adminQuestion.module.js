@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	angular.module('app.question', [
+	angular.module('admin.question', [
 		'app.core',
 		'app.widgets'
 	]);
