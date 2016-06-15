@@ -6,7 +6,7 @@ var questionSchema = new Schema({
 	id: {type: Number, index: true},
 	question: String,
 	type: String,
-	strength: Number,
+	weightage: Number,
 	idealTime: Number,
 	answer: Array
 });

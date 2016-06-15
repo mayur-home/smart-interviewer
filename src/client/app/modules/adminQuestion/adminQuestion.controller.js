@@ -23,6 +23,9 @@
 			{text: 'Very Easy', value: 1}
 		];
 		vm.submit = submit;
+		vm.addAnswer = addAnswer;
+		vm.removeAnswer = removeAnswer;
+		vm.answers = [];
 
 		activate();
 
@@ -33,10 +36,26 @@
 		}
 
 		function submit() {
+			vm.questionMaster.answer = angular.copy(vm.answers);
 			adminQuestionService.save(vm.questionMaster)
 				.then(function() {
 					logger.success('Your record saved..!');
 				});
+		}
+
+		function addAnswer() {
+			var answer = {
+				answer: vm.answerModel.answer,
+				isCorrect: vm.answerModel.isCorrect === 'true'
+			};
+			vm.answers.push(answer);
+			vm.answerModel = {};
+			logger.success('Answer added.!');
+		}
+
+		function removeAnswer($index) {
+			vm.answers.splice($index, 1);
+			logger.warning('Answer removed');
 		}
 	}
 
