@@ -1,0 +1,13 @@
+<div layout="row" layout-align="center">
+	<md-content flex="90">
+		<md-input-container class="md-block">
+			<label>Search question?</label>
+			<input name="search" type="text" ng-model="vm.search">
+		</md-input-container>
+		<md-list-item class="secondary-button-padding" ng-repeat="item in vm.questions">
+			<p>{{item.question}}</p>
+			<md-button class="md-secondary" ng-click="vm.addQuestion(item._id)">Add</md-button>
+		</md-list-item>
+
+	</md-content>
+</div>

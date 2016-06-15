@@ -7,6 +7,8 @@
 			'app.widgets',
 			'app.dashboard',
 			'admin.question',
+			'admin.user',
+			'admin.test',
 			'app.layout'
 		])
 		// TODO - Need to move to seprate config file.

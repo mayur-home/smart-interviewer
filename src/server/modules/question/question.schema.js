@@ -11,6 +11,8 @@ var questionSchema = new Schema({
 	answer: Array
 });
 
+questionSchema.index({question: 'text'});
+
 var Question = mongoose.model('Question', questionSchema);
 
 module.exports = Question;
