@@ -13,8 +13,8 @@
 	}
 
 	var config = {
-		appErrorPrefix: '[smartInterviewer Error] ',
-		appTitle: 'smartInterviewer'
+		appErrorPrefix: '[Smart Interviewer Error] ',
+		appTitle: 'Smart Interviewer'
 	};
 
 	core.value('config', config);
