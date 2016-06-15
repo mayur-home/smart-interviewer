@@ -8,11 +8,22 @@
 			<md-input-container class="md-block">
 				<label>Question Type</label>
 				<md-select ng-model="vm.questionMaster.type">
-					<md-option ng-repeat="type in vm.questionType" value="{{type}}">
-						{{type}}
+					<md-option ng-repeat="item in vm.questionType" value="{{item.value}}">
+						{{item.text}}
 					</md-option>
 				</md-select>
 			</md-input-container>
+			<div ng-if="vm.questionMaster.type">
+				<div ng-if="vm.questionMaster.type === 'MSQ'">
+					MSQ
+				</div>
+				<div ng-if="vm.questionMaster.type === 'SSQ'">
+					SSQ
+				</div>
+				<div ng-if="vm.questionMaster.type === 'DQ'">
+					DQ
+				</div>
+			</div>
 			<md-input-container class="md-block">
 				<label>Weightage</label>
 				<md-select ng-model="vm.questionMaster.weightage">

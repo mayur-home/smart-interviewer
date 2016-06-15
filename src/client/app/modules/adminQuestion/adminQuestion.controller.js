@@ -10,7 +10,11 @@
 		var vm = this;
 		vm.title = 'AdminQuestionController';
 		// TODO - Need to fetch from API.
-		vm.questionType = ['Multi Select Question', 'Single Select Question', 'Descriptive Question'];
+		vm.questionType = [
+			{text: 'Multi Select Question', value: 'MSQ'},
+			{text: 'Single Select Question', value: 'SSQ'},
+			{text: 'Descriptive Question', value: 'DQ'}
+		];
 		vm.weightage = [
 			{text: 'Very Hard', value: 5},
 			{text: 'Hard', value: 4},
