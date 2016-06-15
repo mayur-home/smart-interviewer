@@ -45,9 +45,8 @@
 				</div>
 				<div ng-if="vm.questionMaster.type === 'DQ'">
 					<md-input-container class="md-block">
-						<label>Descriptive Answer</label>
-						<!-- TODO: Need to work for answer[0] -->
-						<textarea ng-model="vm.questionMaster.answer[0]"></textarea>
+						<label ng-init="vm.answers[0].isCorrect = true">Descriptive Answer</label>
+						<textarea ng-model="vm.answers[0].answer"></textarea>
 					</md-input-container>
 				</div>
 			</div>

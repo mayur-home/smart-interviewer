@@ -39,6 +39,7 @@
 			vm.questionMaster.answer = angular.copy(vm.answers);
 			adminQuestionService.save(vm.questionMaster)
 				.then(function() {
+					vm.questionMaster = {};
 					logger.success('Your record saved..!');
 				});
 		}
