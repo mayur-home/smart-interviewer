@@ -1,8 +1,14 @@
-<div ng-controller="ShellController as vm">
-	<header class="clearfix">
-		<si-header></si-header>
-	</header>
-	<md-content>
-		<div ui-view class="md-padding"></div>
-	</md-content>
+<div ng-controller="ShellController as vm" layout="column" flex>
+	<si-header></si-header>
+	<div layout="row" flex>
+		<md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp"
+					md-component-id="left" layout="column">
+			<ul>
+				<li><a ui-sref="adminQuestion">Question</a></li>
+			</ul>
+		</md-sidenav>
+		<md-content flex>
+			<div ui-view class="md-padding"></div>
+		</md-content>
+	</div>
 </div>

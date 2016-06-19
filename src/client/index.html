@@ -27,9 +27,9 @@
     <!-- endinject -->
     <!-- endbuild -->
 </head>
-<body>
-    <div>
-        <div ng-include="'app/layout/shell.html'"></div>
+<body layout="column">
+    <div layout="column" flex>
+        <div ng-include="'app/layout/shell.html'" layout="column" flex></div>
     </div>
 
     <!-- build:js js/lib.js -->
