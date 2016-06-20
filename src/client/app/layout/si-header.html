@@ -12,10 +12,18 @@
 		</div>
 		<div class="collapse navbar-collapse" id="si-navbar">
 			<ul class="nav navbar-nav">
-				<li><a ui-sref="home" data-toggle="collapse" data-target=".navbar-collapse">Home</a></li>
-				<li><a ui-sref="adminQuestion" data-toggle="collapse" data-target=".navbar-collapse">Questions</a></li>
-				<li><a ui-sref="adminTest" data-toggle="collapse" data-target=".navbar-collapse">Test</a></li>
-				<li><a ui-sref="adminUser" data-toggle="collapse" data-target=".navbar-collapse">User</a></li>
+				<li ui-sref-active="active">
+					<a ui-sref="home" data-toggle="collapse" data-target=".navbar-collapse">Home</a>
+				</li>
+				<li ui-sref-active="active">
+					<a ui-sref="adminQuestion" data-toggle="collapse" data-target=".navbar-collapse">Questions</a>
+				</li>
+				<li ui-sref-active="active">
+					<a ui-sref="adminTest" data-toggle="collapse" data-target=".navbar-collapse">Test</a>
+				</li>
+				<li ui-sref-active="active">
+					<a ui-sref="adminUser" data-toggle="collapse" data-target=".navbar-collapse">User</a>
+				</li>
 			</ul>
 		</div>
 	</div>
