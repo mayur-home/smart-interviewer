@@ -5,7 +5,7 @@
 		.module('app', [
 			'app.core',
 			'app.widgets',
-			'app.dashboard',
+			'app.home',
 			'admin.question',
 			'admin.user',
 			'admin.test',

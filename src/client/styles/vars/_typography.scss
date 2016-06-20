@@ -1,0 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+$application-font-style: "Open Sans", "Segoe UI", arial; //setting application font
+
+// overriding application style
+$font-family-sans-serif: $application-font-style;

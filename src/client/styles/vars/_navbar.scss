@@ -1,0 +1,11 @@
+// misc. color;
+$nav-bar-misc-color: #2E7D32; // border and hover colors.
+
+// overriding navbar variables.
+$navbar-inverse-color: $application-brand-color; // overriding navbar inverse color
+$navbar-inverse-bg: $application-brand-color; // overriding navbar inverse bg
+$navbar-inverse-link-color: white;
+$navbar-inverse-brand-hover-color: $nav-bar-misc-color;
+$navbar-inverse-border: $nav-bar-misc-color;
+$navbar-inverse-toggle-border-color: $nav-bar-misc-color;
+$navbar-inverse-toggle-hover-bg: $nav-bar-misc-color;

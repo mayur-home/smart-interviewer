@@ -1,16 +1,26 @@
+/*********************************************
+* Overriding bootstrap using it's variables  *
+*********************************************/
+@import "vars/brand";
+@import "vars/navbar";
+@import "vars/typography";
+
+/*********************************************
+* Importing Bootstrap with above variables.. *
+*********************************************/
 @import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
-.md-button {
-	text-transform: none;
-	padding-left: 10px;
-	padding-right: 10px;
-}
+/*********************************************
+* Application specific used variables styles *
+*********************************************/
+//variables import
+@import "vars/body";
 
-.md-button.md-primary.md-raised {
-	color: whitesmoke;
-}
+//blocks import
+@import "blocks/body";
 
-md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar) {
-	color: whitesmoke;
-	text-shadow: 1px 1px 5px black;
-}
+// elements import
+@import "elements/material-button";
+
+// misc. import
+

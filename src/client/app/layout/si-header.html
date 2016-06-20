@@ -1,7 +1,22 @@
-<md-toolbar class="md-hue-5">
-	<div class="md-toolbar-tools">
-		<h2>
-			Smart Interviewer
-		</h2>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#si-navbar" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Smart Interviewer</a>
+		</div>
+		<div class="collapse navbar-collapse" id="si-navbar">
+			<ul class="nav navbar-nav">
+				<li><a ui-sref="home" data-toggle="collapse" data-target=".navbar-collapse">Home</a></li>
+				<li><a ui-sref="adminQuestion" data-toggle="collapse" data-target=".navbar-collapse">Questions</a></li>
+				<li><a ui-sref="adminTest" data-toggle="collapse" data-target=".navbar-collapse">Test</a></li>
+				<li><a ui-sref="adminUser" data-toggle="collapse" data-target=".navbar-collapse">User</a></li>
+			</ul>
+		</div>
 	</div>
-</md-toolbar>
+</nav>

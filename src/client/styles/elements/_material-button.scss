@@ -1,0 +1,11 @@
+// overrding material button padding and text style
+.md-button {
+	text-transform: none;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+// overriding material button color
+.md-button.md-primary.md-raised {
+	color: whitesmoke;
+}
