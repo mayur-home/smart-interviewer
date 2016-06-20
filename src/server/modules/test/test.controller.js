@@ -1,8 +1,10 @@
 var Test = require('./test.schema');
+var Question = require('../question/question.schema');
 
 module.exports = {
 	create: create,
 	addQuestion: addQuestion,
+	deleteQuestion: deleteQuestion,
 	getQuestions: getQuestions
 };
 
@@ -18,22 +20,46 @@ function create(req, res) {
 }
 
 function addQuestion(req, res) {
-	Test.findOne({ _id: req.body._id}, function(err, test) {
+	Test.findOne({ _id: req.body.testId}, function(err, test) {
 		if(err) {
 			res.json(500, err);
 		}
 		test.questions.push(req.body.questionId);
 		test.save();
-		res.json(req.body.questionId);
+
+		Question.findOne({ _id: req.body.questionId }, function(err, result) {
+			if (err) {
+				res.json(500, err);
+			}
+			res.json(result);
+		});
+	});
+}
+
+function deleteQuestion(req, res) {
+	Test.findOne({ _id: req.query.testId}, function(err, test) {
+		if(err) {
+			res.json(500, err);
+		}
+		console.log(req.query.testId);
+		console.log(test);
+		test.questions.splice(test.questions.indexOf(req.query.questionId), 1);
+		test.save();
+
+		Question.findOne({ _id: req.query.questionId }, function(err, result) {
+			if (err) {
+				res.json(500, err);
+			}
+			res.json(result);
+		});
 	});
 }
 
 function getQuestions(req, res) {
-	Test.findOne({ _id: req.query._id})
+	Test.findOne({ _id: req.query.testId})
 		.populate('questions')
 		.exec(function (err, test) {
 			if (err) return handleError(err);
-			console.log(test.questions);
 			res.json(test.questions);
 		});
 }

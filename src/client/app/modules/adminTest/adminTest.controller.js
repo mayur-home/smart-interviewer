@@ -6,12 +6,14 @@
 		.controller('AdminTestController', AdminTestController);
 
 	/* @ngInject */
-	function AdminTestController($scope, $http, test, logger) {
+	function AdminTestController($scope, $http, testService, testData, $q, logger) {
 		var vm = this;
-		console.log(test);
-		var testId = test._id;
+		var testId = testData._id;
+		testService.setId(testId);
 		vm.title = 'AdminTestController';
 		vm.addQuestion = addQuestion;
+		vm.deleteQuestion = deleteQuestion;
+		vm.questions = [];
 
 		$scope.$watch('vm.search', function(newVal, oldVal) {
 			getQuestions(newVal);
@@ -21,19 +23,38 @@
 
 		function getQuestions(query) {
 			$http.get('/api/search/question?search=' + query).then(function(questions) {
-				console.log(questions);
-				vm.questions = questions.data;
+				vm.searchedQuestions = questions.data;
 			});
 		}
 
 		function addQuestion(id) {
-			$http.post('/api/test/question',
-				{
-					"_id": testId,
-					"questionId": id
-				}, function(data) {
-				console.log('Added question');
-			});
+			testService.addQuestion(id)
+				.then(addQuestionSuccess)
+				.catch(addQuestionFailure);
+
+			function addQuestionSuccess(data) {
+				vm.questions.push(data.data);
+			}
+
+			function addQuestionFailure(err) {
+				logger.error(err);
+			}
+		}
+
+		function deleteQuestion(id) {
+			testService.removeQuestion(id)
+				.then(deleteQuestionSuccess)
+				.catch(deleteQuestionFailure);
+
+			function deleteQuestionSuccess(question) {
+				_.remove(vm.questions, function(n) {
+					return n._id === question.data._id;
+				});
+			}
+
+			function deleteQuestionFailure(err) {
+				logger.error(err);
+			}
 		}
 	}
 })();

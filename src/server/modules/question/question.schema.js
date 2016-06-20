@@ -8,10 +8,12 @@ var questionSchema = new Schema({
 	type: String,
 	weightage: Number,
 	idealTime: Number,
-	answer: Array
+	answer: Array,
+	tags: Array
 });
 
 questionSchema.index({question: 'text'});
+questionSchema.index({tags: 1});
 
 var Question = mongoose.model('Question', questionSchema);
 

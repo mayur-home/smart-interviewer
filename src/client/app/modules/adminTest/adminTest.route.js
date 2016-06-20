@@ -22,7 +22,7 @@
 						title: 'Admin Test',
 						resolve: {
 							/* @ngInject */
-							test: function($http, $q) {
+							testData: function($http, $q) {
 								var defer = $q.defer();
 
 								$http.post('/api/test')

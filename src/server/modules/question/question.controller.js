@@ -3,6 +3,7 @@ var Question = require('./question.schema');
 module.exports = {
 	create: create,
 	getAll: getAll,
+	get: get,
 	getSerchResult: getSerchResult
 };
 
@@ -26,12 +27,20 @@ function getAll(req, res) {
 	});
 }
 
+function get(req, res) {
+	Question.findOne({ _id: req.query.id }, function(err, result) {
+		if (err) {
+			res.json(500, err);
+		}
+		res.json(result);
+	});
+}
+
 function getSerchResult(req, res) {
-	Question.find(
-		{$text: {$search: req.query.search}},
-		{score: {$meta: "textScore"}}
-		)
-		.sort({score: {$meta: "textScore"}})
+	Question.find({$or:[
+		{ tags: { $in: [(req.query.search).toLowerCase()] } },
+		{ $text: { $search: req.query.search } }
+	]})
 		.exec(function(err, results) {
 			if (err) {
 				res.json(500, err);

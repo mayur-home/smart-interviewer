@@ -37,6 +37,10 @@
 
 		function submit() {
 			vm.questionMaster.answer = angular.copy(vm.answers);
+
+			// Make sure to send lowercase string for tags
+			vm.questionMaster.tags = ['angularjs', 'java 123', 'java'];
+
 			adminQuestionService.save(vm.questionMaster)
 				.then(function() {
 					vm.questionMaster = {};
