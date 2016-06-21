@@ -9,7 +9,9 @@
 			'admin.question',
 			'admin.user',
 			'admin.test',
-			'app.layout'
+			'app.layout',
+			'test',
+			'question'
 		])
 		// TODO - Need to move to seprate config file.
 		.config(function($mdThemingProvider) {
