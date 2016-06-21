@@ -44,6 +44,7 @@
 			adminQuestionService.save(vm.questionMaster)
 				.then(function() {
 					vm.questionMaster = {};
+					vm.answerModel = {};
 					logger.success('Your record saved..!');
 				});
 		}
