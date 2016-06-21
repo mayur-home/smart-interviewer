@@ -7,12 +7,14 @@
 
 	/* @ngInject */
 	function testService(session, $http, logger) {
-		var questions = {};
+		var questions;
 		var type = 'fixed'; // may be automated etc.
 		var service = {
 			getId: getId,
 			setId: setId,
-			getQuestions: getQuestions,
+			setQuestions: setQuestions,
+			//getQuestions: getQuestions,
+			getNextQuestion: getNextQuestion,
 			addQuestion: addQuestion,
 			removeQuestion: removeQuestion
 		};
@@ -34,22 +36,30 @@
 			session.set('test.id', id);
 		}
 
-		// This will be used in case of only fixed test case
-		function getQuestions() {
-			return $http.get('/api/test/questions?testId=' + getId())
-				.then(getQuestionsSuccess)
-				.catch(getQuestionsFailure);
-
-			function getQuestionsSuccess(questionsList) {
-				questions = questionsList;
-				return questions;
-			}
-
-			function getQuestionsFailure(err) {
-				logger.error('Error in get questions', err);
-				return err;
-			}
+		function setQuestions(questionList) {
+			questions = _(questionList);
 		}
+
+		function getNextQuestion() {
+			return questions.next();
+		}
+
+		// This will be used in case of only fixed test case
+		//function getQuestions() {
+		//	return $http.get('/api/test/questions?testId=' + getId())
+		//		.then(getQuestionsSuccess)
+		//		.catch(getQuestionsFailure);
+        //
+		//	function getQuestionsSuccess(questionsList) {
+		//		questions = questionsList;
+		//		return questions;
+		//	}
+        //
+		//	function getQuestionsFailure(err) {
+		//		logger.error('Error in get questions', err);
+		//		return err;
+		//	}
+		//}
 
 		function addQuestion(questionId) {
 			return $http.post('/api/test/question', {
@@ -75,7 +85,6 @@
 				questionId: questionId
 			});
 
-			console.log(data);
 			return $http.delete('/api/test/question?' + data)
 				.then(addQuestionSuccess)
 				.catch(addQuestionFailure);
