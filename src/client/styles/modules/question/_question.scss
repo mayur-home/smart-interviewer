@@ -1,0 +1,8 @@
+$answer-option-margin: 50px; //  margin for showing left-side spacing for answer options
+
+// container for showing answer options
+.answer-container {
+	md-radio-button {
+		margin-left: $answer-option-margin; // applying margin for showing left-side spacing
+	}
+}

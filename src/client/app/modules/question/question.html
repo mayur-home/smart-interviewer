@@ -1,5 +1,16 @@
-question
-:
-{{vm.question}}
-:
-<button ng-click="vm.next()">Next question</button>
+<div class="container md-whiteframe-5dp md-padding">
+	<p><strong>Question:</strong> {{vm.question}}</p>
+	<div class="question-answers">
+		<p><strong>Answer:</strong></p>
+		<md-radio-group ng-model="vm.userAnswers" class="answer-container">
+			<md-radio-button value="{{item.answer}}" ng-repeat="item in vm.answer">
+				{{item.answer}}
+			</md-radio-button>
+		</md-radio-group>
+	</div>
+	<div class="question-actions">
+		<md-button ng-click="vm.next()" class="md-primary md-raised pull-right">
+			Save & Continue..
+		</md-button>
+	</div>
+</div>

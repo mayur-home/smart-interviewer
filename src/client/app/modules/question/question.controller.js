@@ -13,6 +13,7 @@
 
 		///////////////
 		vm.question = question.question;
+		vm.answer = question.answer;
 
 		function next() {
 			$state.go('question', {testId: $stateParams.testId, id: testService.getNextQuestion().value});
