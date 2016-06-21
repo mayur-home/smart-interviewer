@@ -1,0 +1,49 @@
+<div ng-if="vm.questionMaster.type">
+	<div ng-if="vm.questionMaster.type === 'MSQ' || vm.questionMaster.type === 'SSQ'"
+		 class="md-whiteframe-5dp md-padding">
+		<h4>Add Answers</h4>
+		<div class="row">
+			<div class="col-md-4">
+				<md-input-container class="md-block">
+					<input type="text" ng-model="vm.answerModel.answer" placeholder="Answer?">
+				</md-input-container>
+			</div>
+			<div class="col-md-4">
+				<md-radio-group ng-model="vm.answerModel.isCorrect" layout="row" layout-align="start center">
+					<md-radio-button class="md-primary" value="true">Yes</md-radio-button>
+					<md-radio-button class="md-primary" value="false">No</md-radio-button>
+				</md-radio-group>
+			</div>
+			<div class="col-md-4">
+				<md-button class="md-raised md-primary" ng-click="vm.addAnswer()">
+					<i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+				</md-button>
+			</div>
+		</div>
+		<div ng-if="vm.answers.length >= 1">
+			<h5>Answers.!</h5>
+			<table class="table table-responsive">
+				<tbody>
+				<tr ng-repeat="item in vm.answers">
+					<td>
+						<md-checkbox ng-model="item.isCorrect" ng-disabled="true">
+							{{item.answer}}
+						</md-checkbox>
+					</td>
+					<td width="10%">
+						<md-button class="md-warn md-raised" ng-click="vm.removeAnswer($index)">
+							<i class="fa fa-trash-o" aria-hidden="true"></i>
+						</md-button>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div ng-if="vm.questionMaster.type === 'DQ'">
+		<md-input-container class="md-block">
+			<label ng-init="vm.answers[0].isCorrect = true">Descriptive Answer</label>
+			<textarea ng-model="vm.answers[0].answer"></textarea>
+		</md-input-container>
+	</div>
+</div>

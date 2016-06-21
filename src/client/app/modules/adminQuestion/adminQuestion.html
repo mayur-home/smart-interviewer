@@ -13,43 +13,7 @@
 				</md-option>
 			</md-select>
 		</md-input-container>
-		<div ng-if="vm.questionMaster.type">
-			<div ng-if="vm.questionMaster.type === 'MSQ'">
-				<div layout="row" layout-align="space-between">
-					<md-input-container class="md-block">
-						<input type="text" ng-model="vm.answerModel.answer" placeholder="Answer?">
-					</md-input-container>
-					<md-radio-group ng-model="vm.answerModel.isCorrect" layout="row" layout-align="start center">
-						<md-radio-button class="md-primary" value="true">Yes</md-radio-button>
-						<md-radio-button class="md-primary" value="false">No</md-radio-button>
-					</md-radio-group>
-					<md-button class="md-raised md-primary" ng-click="vm.addAnswer()">
-						<i class="fa fa-plus-circle" aria-hidden="true"></i> Add
-					</md-button>
-				</div>
-				<div layout="row" ng-if="vm.answers.length >= 1">
-					<md-list flex>
-						<md-subheader class="md-no-sticky">Answers..!</md-subheader>
-						<md-list-item ng-repeat="item in vm.answers">
-							<md-checkbox ng-model="item.isCorrect" ng-disabled="true"></md-checkbox>
-							<p>{{item.answer}}</p>
-							<md-button class="md-warn" ng-click="vm.removeAnswer($index)">
-								<i class="fa fa-trash-o" aria-hidden="true"></i> Remove
-							</md-button>
-						</md-list-item>
-					</md-list>
-				</div>
-			</div>
-			<div ng-if="vm.questionMaster.type === 'SSQ'">
-				SSQ
-			</div>
-			<div ng-if="vm.questionMaster.type === 'DQ'">
-				<md-input-container class="md-block">
-					<label ng-init="vm.answers[0].isCorrect = true">Descriptive Answer</label>
-					<textarea ng-model="vm.answers[0].answer"></textarea>
-				</md-input-container>
-			</div>
-		</div>
+		<answer-entry></answer-entry>
 		<md-input-container class="md-block">
 			<label>Weightage</label>
 			<md-select ng-model="vm.questionMaster.weightage">
