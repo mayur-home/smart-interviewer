@@ -1,4 +1,5 @@
 var Question = require('./question.schema');
+var _ = require('lodash');
 
 module.exports = {
 	create: create,
@@ -32,6 +33,7 @@ function get(req, res) {
 		if (err) {
 			res.json(500, err);
 		}
+		result.answer = _.map(result.answer, 'answer');
 		res.json(result);
 	});
 }
