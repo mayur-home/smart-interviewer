@@ -4,6 +4,7 @@ var Question = require('../question/question.schema');
 module.exports = {
 	create: create,
 	get: get,
+	getAll: getAll,
 	addQuestion: addQuestion,
 	deleteQuestion: deleteQuestion,
 	getQuestions: getQuestions
@@ -66,7 +67,16 @@ function getQuestions(req, res) {
 }
 
 function get(req, res) {
-	Test.findOne({ _id: req.query.testId }, function(err, test) {
+	Test.findOne({ _id: req.params.id }, function(err, test) {
+		if (err) {
+			res.json(500, err);
+		}
+		res.json(test);
+	});
+}
+
+function getAll(req, res) {
+	Test.find({}, function(err, test) {
 		if (err) {
 			res.json(500, err);
 		}

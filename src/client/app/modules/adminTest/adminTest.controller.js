@@ -6,10 +6,10 @@
 		.controller('AdminTestController', AdminTestController);
 
 	/* @ngInject */
-	function AdminTestController($scope, $http, testService, testData, $q, logger) {
+	function AdminTestController($scope, $http, adminTestService, testData, $q, logger) {
 		var vm = this;
 		var testId = testData._id;
-		testService.setId(testId);
+		adminTestService.setId(testId);
 		vm.title = 'AdminTestController';
 		vm.addQuestion = addQuestion;
 		vm.deleteQuestion = deleteQuestion;
@@ -28,7 +28,7 @@
 		}
 
 		function addQuestion(id) {
-			testService.addQuestion(id)
+			adminTestService.addQuestion(id)
 				.then(addQuestionSuccess)
 				.catch(addQuestionFailure);
 
@@ -42,7 +42,7 @@
 		}
 
 		function deleteQuestion(id) {
-			testService.removeQuestion(id)
+			adminTestService.removeQuestion(id)
 				.then(deleteQuestionSuccess)
 				.catch(deleteQuestionFailure);
 

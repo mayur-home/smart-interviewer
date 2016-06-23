@@ -7,7 +7,7 @@
 			'blocks.exception', 'blocks.logger', 'blocks.router',
 			'ui.router', 'ngplus', 'ngMessages','ngMaterial',
 			'core.session',
-			'core.test',
-			'core.testReport'
+			'core.adminTest',
+			'core.test'
 		]);
 })();
