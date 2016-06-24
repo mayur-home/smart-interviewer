@@ -6,7 +6,7 @@
 		.controller('ShellController', ShellController);
 
 	/* @ngInject */
-	function ShellController( config, logger) {
+	function ShellController(config, logger) {
 		var vm = this;
 
 		activate();

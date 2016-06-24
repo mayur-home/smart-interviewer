@@ -6,7 +6,8 @@
 		.controller('testController', testController);
 
 	/* @ngInject */
-	function testController(test, testService, $stateParams, $state, logger) {
+	function testController(test, testService, $stateParams, $state) {
+		// jshint validthis: true
 		var vm = this;
 		vm.startTest = startTest;
 

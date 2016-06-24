@@ -13,7 +13,7 @@ module.exports = {
 
 function create(req, res) {
 	Test.create(req.body, function(err, question) {
-		if(err) {
+		if (err) {
 			res.json(500, err);
 		}
 		res.json(question);
@@ -21,14 +21,14 @@ function create(req, res) {
 }
 
 function addQuestion(req, res) {
-	Test.findOne({ _id: req.body.testId}, function(err, test) {
-		if(err) {
+	Test.findOne({_id: req.body.testId}, function(err, test) {
+		if (err) {
 			res.json(500, err);
 		}
 		test.questions.push(req.body.questionId);
 		test.save();
 
-		Question.findOne({ _id: req.body.questionId }, function(err, result) {
+		Question.findOne({_id: req.body.questionId}, function(err, result) {
 			if (err) {
 				res.json(500, err);
 			}
@@ -38,8 +38,8 @@ function addQuestion(req, res) {
 }
 
 function deleteQuestion(req, res) {
-	Test.findOne({ _id: req.query.testId}, function(err, test) {
-		if(err) {
+	Test.findOne({_id: req.query.testId}, function(err, test) {
+		if (err) {
 			res.json(500, err);
 		}
 		console.log(req.query.testId);
@@ -47,7 +47,7 @@ function deleteQuestion(req, res) {
 		test.questions.splice(test.questions.indexOf(req.query.questionId), 1);
 		test.save();
 
-		Question.findOne({ _id: req.query.questionId }, function(err, result) {
+		Question.findOne({_id: req.query.questionId}, function(err, result) {
 			if (err) {
 				res.json(500, err);
 			}
@@ -57,16 +57,18 @@ function deleteQuestion(req, res) {
 }
 
 function getQuestions(req, res) {
-	Test.findOne({ _id: req.query.testId})
+	Test.findOne({_id: req.query.testId})
 		.populate('questions')
-		.exec(function (err, test) {
-			if (err) return handleError(err);
+		.exec(function(err, test) {
+			if (err) {
+				res.json(500, err);
+			}
 			res.json(test.questions);
 		});
 }
 
 function get(req, res) {
-	Test.findOne({ _id: req.query.testId }, function(err, test) {
+	Test.findOne({_id: req.query.testId}, function(err, test) {
 		if (err) {
 			res.json(500, err);
 		}

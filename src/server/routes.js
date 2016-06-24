@@ -9,7 +9,9 @@ var routes = [
 ];
 
 for (var index in routes) {
-	require(routes[index])(router);
+	if (index) {
+		require(routes[index])(router);
+	}
 }
 
 module.exports = router;

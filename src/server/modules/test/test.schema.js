@@ -5,7 +5,7 @@ var testSchema = new Schema({
 	// creating index on field id
 	id: {type: Number, index: true},
 	name: String,
-	questions: [{ type: Schema.Types.ObjectId, ref: 'Question' }]
+	questions: [{type: Schema.Types.ObjectId, ref: 'Question'}]
 });
 
 var Test = mongoose.model('Test', testSchema);
