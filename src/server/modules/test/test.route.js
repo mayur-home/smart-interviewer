@@ -7,5 +7,6 @@ module.exports = function(router) {
 	router.post('/test/question', test.addQuestion);
 	router.delete('/test/question', test.deleteQuestion);
 	router.get('/test/questions', test.getQuestions);
-	router.get('/test', test.get);
+	router.get('/test/:id', test.get);
+	router.get('/test', test.getAll);
 };

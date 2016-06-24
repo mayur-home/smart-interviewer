@@ -6,34 +6,35 @@
 		.factory('testService', testService);
 
 	/* @ngInject */
-	function testService(session, $http, logger) {
-		var questions;
-		var type = 'fixed'; // may be automated etc.
+	function testService(logger) {
+		var testId, testType, questions;
+		var answers = [];
 		var service = {
-			getId: getId,
 			setId: setId,
+			getId: getId,
+			setTestType: setTestType,
+			recordAnswer: recordAnswer,
 			setQuestions: setQuestions,
-			//getQuestions: getQuestions,
-			getNextQuestion: getNextQuestion,
-			addQuestion: addQuestion,
-			removeQuestion: removeQuestion
+			getNextQuestion: getNextQuestion
 		};
 
 		return service;
 
-		////////////////
+		////////////////////
 
-		function getId() {
-			var id = session.get('test.id');
-			if (!id) {
-				logger.error('Test does not exist in session');
-				return;
-			}
-			return id;
+		function setTestType(type) {
+			// automated/prepared
+			testType = type;
 		}
 
 		function setId(id) {
-			session.set('test.id', id);
+			// session.set('test.id', id);
+			testId = id;
+		}
+
+		function getId(id) {
+			// session.set('test.id', id);
+			return testId;
 		}
 
 		function setQuestions(questionList) {
@@ -44,59 +45,9 @@
 			return questions.next();
 		}
 
-		// This will be used in case of only fixed test case
-		//function getQuestions() {
-		//	return $http.get('/api/test/questions?testId=' + getId())
-		//		.then(getQuestionsSuccess)
-		//		.catch(getQuestionsFailure);
-        //
-		//	function getQuestionsSuccess(questionsList) {
-		//		questions = questionsList;
-		//		return questions;
-		//	}
-        //
-		//	function getQuestionsFailure(err) {
-		//		logger.error('Error in get questions', err);
-		//		return err;
-		//	}
-		//}
-
-		function addQuestion(questionId) {
-			return $http.post('/api/test/question', {
-					testId: getId(),
-					questionId: questionId
-				})
-				.then(addQuestionSuccess)
-				.catch(addQuestionFailure);
-
-			function addQuestionSuccess(question) {
-				return question;
-			}
-
-			function addQuestionFailure(err) {
-				logger.error('Error in add question', err);
-				return err;
-			}
-		}
-
-		function removeQuestion(questionId) {
-			var data = $.param({
-				testId: getId(),
-				questionId: questionId
-			});
-
-			return $http.delete('/api/test/question?' + data)
-				.then(addQuestionSuccess)
-				.catch(addQuestionFailure);
-
-			function addQuestionSuccess(question) {
-				return question;
-			}
-
-			function addQuestionFailure(err) {
-				logger.error('Error in add question', err);
-				return err;
-			}
+		function recordAnswer(answer) {
+			// { id: 'questionId', isTrue: 'status'}
+			answers.push(answer);
 		}
 	}
 })();

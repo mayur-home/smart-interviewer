@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('core.testReport', [
+		.module('core.adminTest', [
 			'app.core'
 		]);
 })();

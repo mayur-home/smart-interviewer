@@ -22,7 +22,7 @@
 						resolve: {
 							/* @ngInject */
 							test: function($stateParams, $http, logger) {
-								return $http.get('/api/test?testId=' + $stateParams.id)
+								return $http.get('/api/userTest/' + $stateParams.id)
 									.then(getTestSuccess)
 									.catch(getTestFailure);
 

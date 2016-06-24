@@ -8,6 +8,8 @@
 	/* @ngInject */
 	function AdminQuestionController(logger, adminQuestionService) {
 		var vm = this;
+		var answerIdCounter = 0;
+
 		vm.title = 'AdminQuestionController';
 		// TODO - Need to fetch from API.
 		vm.questionType = [
@@ -52,7 +54,8 @@
 		function addAnswer() {
 			var answer = {
 				answer: vm.answerModel.answer,
-				isCorrect: vm.answerModel.isCorrect === 'true'
+				isCorrect: vm.answerModel.isCorrect === 'true',
+				id: ++answerIdCounter
 			};
 			vm.answers.push(answer);
 			vm.answerModel = {};

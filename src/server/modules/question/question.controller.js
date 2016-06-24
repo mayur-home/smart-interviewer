@@ -1,9 +1,11 @@
 var Question = require('./question.schema');
+var _ = require('lodash');
 
 module.exports = {
 	create: create,
 	getAll: getAll,
 	get: get,
+	getResult: getResult,
 	getSerchResult: getSerchResult
 };
 
@@ -32,6 +34,17 @@ function get(req, res) {
 		if (err) {
 			res.json(500, err);
 		}
+		result.answer = _.map(result.answer, modifyAnswer);
+		res.json(result);
+	});
+}
+
+function getResult(req, res) {
+	Question.findOne({ _id: req.query.id }, function(err, result) {
+		if (err) {
+			res.json(500, err);
+		}
+		result.answer = _.map(result.answer, modifyAnswer);
 		res.json(result);
 	});
 }
@@ -49,4 +62,13 @@ function getSerchResult(req, res) {
 			}
 			res.json(results);
 		});
+}
+
+////////
+
+function modifyAnswer(answer) {
+	return {
+		id: answer.id,
+		answer: answer.answer
+	}
 }
