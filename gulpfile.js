@@ -215,11 +215,11 @@ gulp.task('optimize', ['inject'], function() {
 	var assets = $.useref.assets({searchPath: './'});
 	// Filters are named for the gulp-useref path
 	var cssFilter = $.filter('**/*.css');
-	var jsAppFilter = $.filter('**/' + config.optimized.app);
-	var jslibFilter = $.filter('**/' + config.optimized.lib);
+	var jsAppFilter = $.filter('**/app-*.js');
+	var jslibFilter = $.filter('**/lib-*.js');
 
 	var templateCache = config.temp + config.templateCache.file;
-
+	
 	return gulp
 		.src(config.index)
 		.pipe($.plumber())
@@ -227,15 +227,15 @@ gulp.task('optimize', ['inject'], function() {
 		.pipe(assets) // Gather all assets from the html with useref
 		// Get the css
 		// TODO - Need to fix cssFilter error.
-		//.pipe(cssFilter)
-		//.pipe($.minifyCss())
+		// .pipe(cssFilter)
+		// .pipe($.minifyCss())
 		//.pipe(cssFilter.restore())
 		// Get the custom javascript
-		// .pipe(jsAppFilter)
-		// .pipe($.ngAnnotate({add: true}))
-		// .pipe($.uglify())
-		// .pipe(getHeader())
-		// .pipe(jsAppFilter.restore())
+		.pipe(jsAppFilter)
+		.pipe($.ngAnnotate({add: true}))
+		.pipe($.uglify())
+		.pipe(getHeader())
+		.pipe(jsAppFilter.restore())
 		// Get the vendor javascript
 		.pipe(jslibFilter)
 		.pipe($.uglify()) // another option is to override wiredep to use min files
