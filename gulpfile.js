@@ -211,12 +211,12 @@ gulp.task('build', ['optimize','images', 'fonts'], function() {
  */
 gulp.task('optimize', ['inject'], function() {
 	log('Optimizing the js, css, and html');
-
+	// TODO - Need to work more on this part;
 	var assets = $.useref.assets({searchPath: './'});
 	// Filters are named for the gulp-useref path
 	var cssFilter = $.filter('**/*.css');
-	var jsAppFilter = $.filter('**/app-*.js');
-	var jslibFilter = $.filter('**/lib-*.js');
+	var jsAppFilter = $.filter('**/' + config.optimized.app);
+	var jslibFilter = $.filter('**/' + config.optimized.lib);
 
 	var templateCache = config.temp + config.templateCache.file;
 	
@@ -518,7 +518,7 @@ function startBrowserSync(isDev, specRunner) {
 		injectChanges: true,
 		logFileChanges: true,
 		logLevel: 'info',
-		logPrefix: 'hottowel',
+		logPrefix: 'Smart Interviewer',
 		notify: true,
 		reloadDelay: 0 //1000
 	};
