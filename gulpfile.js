@@ -211,7 +211,7 @@ gulp.task('build', ['optimize','images', 'fonts'], function() {
  */
 gulp.task('optimize', ['inject'], function() {
 	log('Optimizing the js, css, and html');
-	// TODO - Need to work more on this part;
+	
 	var assets = $.useref.assets({searchPath: './'});
 	// Filters are named for the gulp-useref path
 	var cssFilter = $.filter('**/*.css');
