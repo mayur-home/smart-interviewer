@@ -70,5 +70,9 @@
     "requireCommaBeforeLineBreak": null,
     "requireDotNotation": null,
     "requireMultipleVarDecl": null,
-    "requireParenthesesAroundIIFE": true
+    "requireParenthesesAroundIIFE": true,
+	"validateIndentation": { // enforce tab character for indentation
+		"value": "\t",
+		"allExcept": ["comments"]
+	}
 }

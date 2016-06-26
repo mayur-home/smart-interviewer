@@ -7,6 +7,7 @@
 
 	/* @ngInject */
 	function testController(test, testService, adminTestService, $stateParams, $state, $http, logger) {
+		// jshint validthis: true
 		var vm = this;
 		vm.startTest = startTest;
 		vm.firstName = test.firstName;
