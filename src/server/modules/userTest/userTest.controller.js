@@ -3,7 +3,8 @@ var Usertest = require('./userTest.schema');
 module.exports = {
 	getAll: getAll,
 	getTest: getTest,
-	createTest: createTest
+	createTest: createTest,
+	recordAnswer: recordAnswer
 };
 
 //////////////////////////
@@ -31,6 +32,22 @@ function getTest(req, res) {
 		if (err) {
 			res.json(500, err);
 		}
+		res.json(test);
+	});
+}
+
+function recordAnswer(req, res) {
+	Usertest.findOne({ _id: req.body.id}, function(err, test) {
+		if (err) {
+			res.json(500, err);
+		}
+		console.log(test);
+		console.log(req.params);
+		test.answers.push({
+			questionId: req.body.questionId,
+			answerId: req.body.answerId
+		});
+		test.save();
 		res.json(test);
 	});
 }

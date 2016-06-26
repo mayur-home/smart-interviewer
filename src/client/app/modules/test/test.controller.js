@@ -11,6 +11,8 @@
 		vm.startTest = startTest;
 		vm.firstName = test.firstName;
 
+		testService.setUserTestId(test._id);
+
 		console.log(test);
 		$http.get('/api/test/' + test.testId)
 			.then(testSuccess)

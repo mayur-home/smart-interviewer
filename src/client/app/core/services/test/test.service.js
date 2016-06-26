@@ -6,16 +6,18 @@
 		.factory('testService', testService);
 
 	/* @ngInject */
-	function testService(logger) {
-		var testId, testType, questions;
-		var answers = [];
+	function testService($http, logger) {
+		var testId, userTestId, testType, questions;
 		var service = {
 			setId: setId,
 			getId: getId,
+			setUserTestId: setUserTestId,
+			getUserTestId: getUserTestId,
 			setTestType: setTestType,
 			recordAnswer: recordAnswer,
 			setQuestions: setQuestions,
-			getNextQuestion: getNextQuestion
+			getNextQuestion: getNextQuestion,
+			generateReport: generateReport
 		};
 
 		return service;
@@ -37,6 +39,14 @@
 			return testId;
 		}
 
+		function setUserTestId(id) {
+			userTestId = id;
+		}
+
+		function getUserTestId() {
+			return userTestId;
+		}
+
 		function setQuestions(questionList) {
 			questions = _(questionList);
 		}
@@ -46,8 +56,15 @@
 		}
 
 		function recordAnswer(answer) {
-			// { id: 'questionId', isTrue: 'status'}
-			answers.push(answer);
+			return $http.post('/api/userTest/recordAnswer', {
+				id: userTestId,
+				questionId: answer.questionId,
+				answerId: answer.answerId
+			});
+		}
+
+		function generateReport() {
+
 		}
 	}
 })();

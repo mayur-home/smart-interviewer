@@ -7,4 +7,5 @@ module.exports = function(router) {
 	router.get('/question', question.get);
 	router.get('/questions', question.getAll);
 	router.get('/search/question', question.getSerchResult);
+	router.get('/question/:id/answer/:answerId', question.getResult);
 };

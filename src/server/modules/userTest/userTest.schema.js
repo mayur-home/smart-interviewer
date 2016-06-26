@@ -5,7 +5,8 @@ var usertestSchema = new Schema({
 	testId: String,
 	email: String,
 	firstName: String,
-	lastName: String
+	lastName: String,
+	answers: []
 });
 
 var UsertestSchema = mongoose.model('UsertestSchema', usertestSchema);

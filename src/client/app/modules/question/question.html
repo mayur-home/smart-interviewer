@@ -2,7 +2,7 @@
 	<p><strong>Question:</strong> {{vm.question}}</p>
 	<div class="question-answers">
 		<p><strong>Answer:</strong></p>
-		<md-radio-group ng-model="vm.answer" class="answer-container">
+		<md-radio-group ng-model="vm.answerId" class="answer-container">
 			<md-radio-button value="{{answer.id}}" ng-repeat="answer in vm.answers">
 				{{answer.answer}}
 			</md-radio-button>

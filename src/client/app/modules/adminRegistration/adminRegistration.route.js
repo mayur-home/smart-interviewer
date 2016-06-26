@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular
-		.module('admin.question')
+		.module('admin.registration')
 		.run(appRun);
 
 	/* @ngInject */
@@ -13,13 +13,13 @@
 	function getStates() {
 		return [
 			{
-				state: 'adminQuestion',
+				state: 'adminRegistration',
 				config: {
-					url: '/admin/question',
-					templateUrl: 'app/modules/adminQuestion/adminQuestion.html',
-					controller: 'AdminQuestionController',
+					url: '/admin/register',
+					templateUrl: 'app/modules/adminRegistration/adminRegistration.html',
+					controller: 'AdminRegistrationController',
 					controllerAs: 'vm',
-					title: 'Admin Question'
+					title: 'Admin Signup'
 				}
 			}
 		];

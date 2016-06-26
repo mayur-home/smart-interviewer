@@ -40,12 +40,17 @@ function get(req, res) {
 }
 
 function getResult(req, res) {
-	Question.findOne({ _id: req.query.id }, function(err, result) {
+	Question.findOne({ _id: req.params.id }, function(err, result) {
 		if (err) {
 			res.json(500, err);
 		}
-		result.answer = _.map(result.answer, modifyAnswer);
-		res.json(result);
+		console.log(result.answer);
+		console.log(req.params.answerId);
+		var answer = _.filter(result.answer, {id: parseInt(req.params.answerId)})[0];
+		console.log(answer);
+		res.json({
+			'isCorrect': answer.isCorrect
+		});
 	});
 }
 

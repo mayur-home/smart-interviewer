@@ -17,12 +17,22 @@
 		vm.id = question._id;
 
 		function next() {
-			console.log(vm.answer);
-			$state.go('question', {testId: $stateParams.testId, id: testService.getNextQuestion().value});
+			recordAnswer()
+				.then(function() {
+					var nextQuestion = testService.getNextQuestion().value;
+					if (nextQuestion) {
+						$state.go('question', {testId: $stateParams.testId, id: nextQuestion});
+					} else {
+						$state.go('testComplete', {testId: $stateParams.testId});
+					}
+				});
 		}
 
 		function recordAnswer() {
-
+			return testService.recordAnswer({
+				questionId: vm.id,
+				answerId: vm.answerId
+			});
 		}
 	}
 
