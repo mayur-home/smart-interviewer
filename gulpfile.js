@@ -211,7 +211,7 @@ gulp.task('build', ['optimize','images', 'fonts'], function() {
  */
 gulp.task('optimize', ['inject'], function() {
 	log('Optimizing the js, css, and html');
-	
+
 	var assets = $.useref.assets({searchPath: './'});
 	// Filters are named for the gulp-useref path
 	var cssFilter = $.filter('**/*.css');
@@ -219,7 +219,7 @@ gulp.task('optimize', ['inject'], function() {
 	var jslibFilter = $.filter('**/' + config.optimized.lib);
 
 	var templateCache = config.temp + config.templateCache.file;
-	
+
 	return gulp
 		.src(config.index)
 		.pipe($.plumber())
@@ -229,7 +229,7 @@ gulp.task('optimize', ['inject'], function() {
 		// TODO - Need to fix cssFilter error.
 		// .pipe(cssFilter)
 		// .pipe($.minifyCss())
-		//.pipe(cssFilter.restore())
+		// .pipe(cssFilter.restore())
 		// Get the custom javascript
 		.pipe(jsAppFilter)
 		.pipe($.ngAnnotate({add: true}))
