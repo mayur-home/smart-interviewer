@@ -6,12 +6,12 @@
 		.factory('session', sessionService);
 
 	/* @ngInject */
-	function sessionService($q, $http, $rootScope, logger) {
-		var sessionData = {};
+	function sessionService($q, $http, $rootScope, $window, logger) {
 		var authUrl = '/api/auth/session';
 		var service = {
 			set: set,
 			get: get,
+			remove: remove,
 			signin: signin,
 			signout: signout,
 			getLoginData: getLoginData
@@ -22,15 +22,15 @@
 		/////////////
 
 		function set(key, value) {
-			sessionData[key] = value;
+			$window.sessionStorage.setItem(key, value);
 		}
 
 		function get(key) {
-			if (!sessionData[key]) {
-				logger.error('Key does not exist in session');
-				return;
-			}
-			return sessionData[key];
+			return $window.sessionStorage.getItem(key);
+		}
+
+		function remove(key) {
+			$window.sessionStorage.removeItem(key);
 		}
 
 		function signin(user) {
@@ -44,7 +44,7 @@
 
 			function signinSuccess(response) {
 				var user = response.data;
-				set('user', user.email);
+				set('user', JSON.stringify(user));
 				$rootScope.$broadcast('login', user);
 				defer.resolve(user);
 			}

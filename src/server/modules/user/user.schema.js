@@ -27,7 +27,12 @@ userSchema
 userSchema
 	.virtual('user_info')
 	.get(function () {
-		return { '_id': this._id, 'email': this.email };
+		return {
+			_id: this._id,
+			email: this.email,
+			firstName: this.firstName,
+			lastName: this.lastName
+		};
 	});
 
 /**

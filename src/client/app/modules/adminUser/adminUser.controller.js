@@ -6,9 +6,10 @@
 		.controller('AdminUserController', AdminUserController);
 
 	/* @ngInject */
-	function AdminUserController(logger, $http, $state) {
+	function AdminUserController(logger, $http, $state, session) {
 		var vm = this;
 		vm.title = 'AdminQuestionController';
+		vm.user = JSON.parse(session.get('user'));
 		vm.addTest = addTest;
 		vm.createTestForCandidate = createTestForCandidate;
 
@@ -25,6 +26,7 @@
 
 		function createTestForCandidate() {
 			$http.post('/api/userTest', {
+				interviewerId: vm.user._id,
 				testId: vm.candidate.test,
 				email: vm.candidate.email,
 				firstName: vm.candidate.firstName,

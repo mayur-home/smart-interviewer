@@ -12,13 +12,24 @@
 			controller: TopNavController,
 			controllerAs: 'vm',
 			restrict: 'EA',
-			scope: {},
+			scope: {
+				user: '=user'
+			},
 			templateUrl: 'app/layout/si-header.html'
 		};
 
 		/* @ngInject */
-		function TopNavController() {
+		function TopNavController(session, $rootScope, $state) {
 			var vm = this;
+			vm.logout = logout;
+
+			//////////////
+
+			function logout() {
+				session.signout();
+				$rootScope.$broadcast('logOut');
+				$state.go('adminLogin');
+			}
 		}
 
 		return directive;

@@ -30,7 +30,6 @@ exports.logout = function(req, res) {
  *  requires: {email, password}
  */
 exports.login = function(req, res, next) {
-	console.log('helo')
 	passport.authenticate('login', function(err, user, info) {
 		var error = err || info;
 		if (error) {
