@@ -26,7 +26,10 @@
 			function($rootScope, session, $state) {
 			$rootScope.$on('$stateChangeStart',
 				function(event, toState, toParams, fromState, fromParams, options) {
-					if (toState.authenticate) {
+					// if user is exist in Session storage then do not make a
+					// call to loginData service - to reduce API call on each and every
+					// authentication required pages
+					if (!session.get('user') && toState.authenticate) {
 						session.getLoginData()
 							.catch(function() {
 								$state.go('adminLogin');
