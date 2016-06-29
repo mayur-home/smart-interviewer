@@ -16,26 +16,31 @@
 			'question',
 			'testComplete'
 		])
-		// TODO - Need to move to seprate config file.
-		.config(function($mdThemingProvider) {
-			$mdThemingProvider.theme('default')
-				.primaryPalette('green');
-		})
-		.run(
-			/* @ngInject */
-			function($rootScope, session, $state) {
-			$rootScope.$on('$stateChangeStart',
-				function(event, toState, toParams, fromState, fromParams, options) {
-					// if user is exist in Session storage then do not make a
-					// call to loginData service - to reduce API call on each and every
-					// authentication required pages
-					if (!session.get('user') && toState.authenticate) {
-						session.getLoginData()
-							.catch(function() {
-								$state.go('adminLogin');
-							});
-					}
-				});
-		})
+		.config(config)
+		.run(run);
+
+	// TODO - Need to move to seprate config file.
+	/* @ngInject */
+	function config($mdThemingProvider) {
+		$mdThemingProvider.theme('default')
+			.primaryPalette('green');
+	}
+
+	// TODO - Need to move to seprate run file.
+	/* @ngInject */
+	function run($rootScope, session, $state) {
+		$rootScope.$on('$stateChangeStart',
+			function(event, toState, toParams, fromState, fromParams, options) {
+				// if user is exist in Session storage then do not make a
+				// call to loginData service - to reduce API call on each and every
+				// authentication required pages
+				if (!session.get('user') && toState.authenticate) {
+					session.getLoginData()
+						.catch(function() {
+							$state.go('adminLogin');
+						});
+				}
+			});
+	}
 
 })();
