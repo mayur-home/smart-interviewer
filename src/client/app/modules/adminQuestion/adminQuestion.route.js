@@ -19,7 +19,8 @@
 					templateUrl: 'app/modules/adminQuestion/adminQuestion.html',
 					controller: 'AdminQuestionController',
 					controllerAs: 'vm',
-					title: 'Admin Question'
+					title: 'Admin Question',
+					authenticate: true
 				}
 			}
 		];

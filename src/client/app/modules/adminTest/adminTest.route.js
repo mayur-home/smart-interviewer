@@ -20,6 +20,7 @@
 						controller: 'AdminTestController',
 						controllerAs: 'vm',
 						title: 'Admin Test',
+						authenticate: true,
 						resolve: {
 							/* @ngInject */
 							testData: function($http, $q) {

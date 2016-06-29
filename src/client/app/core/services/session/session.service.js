@@ -68,14 +68,20 @@
 			var defer = $q.defer();
 
 			$http.get(authUrl)
-				.then(getSessionSuccess);
+				.then(getSessionSuccess)
+				.catch(getSessionFailure);
 
 			function getSessionSuccess(response) {
 				if (response.data._id) {
 					var user = response.data;
-					set('user', user.email);
+					set('user', JSON.stringify(user));
 					defer.resolve(user);
 				}
+			}
+
+			function getSessionFailure(error) {
+				logger.error('User is unauthorised', error);
+				defer.reject(error);
 			}
 
 			return defer.promise;

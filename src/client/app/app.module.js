@@ -20,6 +20,19 @@
 		.config(function($mdThemingProvider) {
 			$mdThemingProvider.theme('default')
 				.primaryPalette('green');
-		});
+		})
+		.run(
+			/* @ngInject */
+			function($rootScope, session, $state) {
+			$rootScope.$on('$stateChangeStart',
+				function(event, toState, toParams, fromState, fromParams, options) {
+					if (toState.authenticate) {
+						session.getLoginData()
+							.catch(function() {
+								$state.go('adminLogin');
+							});
+					}
+				});
+		})
 
 })();
