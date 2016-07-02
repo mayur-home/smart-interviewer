@@ -18,26 +18,42 @@
 				vm.tests = data.data;
 			});
 
+		$http.get('/api/user/'+ vm.user._id +'/tests')
+			.then(function(data) {
+				vm.userTests = data.data;
+			});
+
 		///////////////
 
 		function addTest() {
-			$state.go('adminTest');
+			console.log(vm.test.name);
+			$state.go('adminTest', {
+				testName: vm.test.name,
+				userId: vm.user._id
+			});
 		}
 
 		function createTestForCandidate() {
 			$http.post('/api/userTest', {
-				interviewerId: vm.user._id,
 				testId: vm.candidate.test,
 				email: vm.candidate.email,
 				firstName: vm.candidate.firstName,
-				lastName: vm.candidate.lastName
+				lastName: vm.candidate.lastName,
+				creator: vm.user._id
 			})
 				.then(createTestSuccess)
 				.catch(createTestFailure);
 
 			function createTestSuccess(test) {
-				console.log(test);
-				logger.info('User test created successfully');
+				var data = test.data;
+				console.log(data);
+				$http.post('/api/user/test', {
+					userId: vm.user._id,
+					testId: data._id
+				})
+					.then(function() {
+						logger.info('User test created successfully');
+					});
 			}
 
 			function createTestFailure(err) {

@@ -8,7 +8,8 @@ var userSchema = new Schema({
 	firstName: String,
 	lastName: String,
 	email: String,
-	hashedPassword: String
+	hashedPassword: String,
+	tests: [{type: Schema.Types.ObjectId, ref: 'Usertest'}]
 });
 
 /**

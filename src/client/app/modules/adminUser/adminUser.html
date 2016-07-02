@@ -2,6 +2,7 @@
 	<h1>Welcome back, {{vm.user.firstName}}!</h1>
 	<div>
 		<md-content>
+			<input ng-model="vm.test.name">
 			<md-button class="md-raised md-primary" ng-click="vm.addTest()">
 				Add a new Test!
 			</md-button>
@@ -31,7 +32,7 @@
 						<label>Test</label>
 						<md-select ng-model="vm.candidate.test">
 							<md-option ng-repeat="test in vm.tests" value="{{test._id}}">
-								{{test._id}}
+								{{test.name}}
 							</md-option>
 						</md-select>
 					</md-input-container>
@@ -41,5 +42,10 @@
 				</form>
 			</div>
 		</md-content>
+	</div>
+	<div>
+		<ul>
+			<li ng-repeat="userTest in vm.userTests">{{userTest._id}} --</li>
+		</ul>
 	</div>
 </div>

@@ -5,9 +5,8 @@
 		.module('admin.test')
 		.run(appRun);
 
-	appRun.$inject = ['routerHelper'];
 	/* @ngInject */
-	function appRun(routerHelper, $http, $q) {
+	function appRun(routerHelper, $stateParams) {
 		routerHelper.configureStates(getStates());
 
 		function getStates() {
@@ -20,13 +19,21 @@
 						controller: 'AdminTestController',
 						controllerAs: 'vm',
 						title: 'Admin Test',
+						params: {
+							testName: $stateParams.testName,
+							userId: $stateParams.userId
+						},
 						authenticate: true,
 						resolve: {
 							/* @ngInject */
-							testData: function($http, $q) {
+							testData: function($http, $q, $stateParams) {
+								console.log($stateParams);
 								var defer = $q.defer();
 
-								$http.post('/api/test')
+								$http.post('/api/test', {
+									name: $stateParams.testName,
+									creator: $stateParams.userId
+								})
 									.then(function(test) {
 										defer.resolve(test.data);
 									})

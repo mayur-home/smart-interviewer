@@ -4,6 +4,7 @@ module.exports = {
 	getAll: getAll,
 	getTest: getTest,
 	createTest: createTest,
+	getUserTests: getUserTests,
 	recordAnswer: recordAnswer
 };
 
@@ -19,6 +20,15 @@ function createTest(req, res) {
 }
 
 function getAll(req, res) {
+	Usertest.find({}, function(err, result) {
+		if (err) {
+			res.json(500, err);
+		}
+		res.json(result);
+	});
+}
+
+function getUserTests(req, res) {
 	Usertest.find({}, function(err, result) {
 		if (err) {
 			res.json(500, err);
