@@ -12,6 +12,7 @@
 		vm.user = JSON.parse(session.get('user'));
 		vm.addTest = addTest;
 		vm.createTestForCandidate = createTestForCandidate;
+		vm.showTestReport = showTestReport;
 
 		$http.get('/api/test')
 			.then(function(data) {
@@ -59,6 +60,12 @@
 			function createTestFailure(err) {
 				console.log(err);
 			}
+		}
+
+		function showTestReport(testId) {
+			$state.go('adminTestReport', {
+				id: testId
+			});
 		}
 	}
 

@@ -11,13 +11,28 @@
 			'admin.test',
 			'admin.login',
 			'admin.registration',
+			'admin.testReport',
 			'app.layout',
 			'test',
 			'question',
-			'testComplete'
+			'testComplete',
+			'ngCkeditor'
 		])
 		.config(config)
-		.run(run);
+		.run(run)
+		.directive('snippet', ['$timeout', '$interpolate', function ($timeout, $interpolate) {
+			"use strict";
+			return {
+				restrict: 'E',
+				template: '<pre><code ng-transclude></code></pre>',
+				replace: true,
+				transclude: true,
+				link: function (scope, elm) {
+					var tmp = htmlDecode($interpolate(elm.find('code').text())(scope));
+					elm.find('code').html(hljs.highlightAuto(tmp).value);
+				}
+			};
+		}]);
 
 	// TODO - Need to move to seprate config file.
 	/* @ngInject */

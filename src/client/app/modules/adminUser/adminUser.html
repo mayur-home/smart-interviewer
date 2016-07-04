@@ -1,51 +1,65 @@
 <div class="container">
-	<h1>Welcome back, {{vm.user.firstName}}!</h1>
-	<div>
-		<md-content>
-			<input ng-model="vm.test.name">
-			<md-button class="md-raised md-primary" ng-click="vm.addTest()">
-				Add a new Test!
-			</md-button>
-		</md-content>
+	<h2>Welcome back, {{vm.user.firstName}}!</h2>
+	<hr>
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Usertest Status</b></div>
+		<div class="panel-body">
+			<table class="table">
+				<thead>
+				<tr>
+					<th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Status</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="userTest in vm.userTests">
+					<td>{{userTest._id}}</td>
+					<td>{{userTest.firstName}}</td>
+					<td>{{userTest.lastName}}</td>
+					<td><span ng-if="userTest.isCompleted" ng-click="vm.showTestReport(userTest._id)">Completed</span></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-	<div>
-		<h3>Assign a Test</h3>
-		<md-content layout-padding>
-			<div>
-				<form name="userForm">
-					<div layout-gt-sm="row">
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>First name</label>
-							<input ng-model="vm.candidate.firstName">
-						</md-input-container>
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>Last Name</label>
-							<input ng-model="vm.candidate.lastName">
-						</md-input-container>
-					</div>
-					<md-input-container class="md-block">
-						<label>Email address</label>
-						<input ng-model="vm.candidate.email">
-					</md-input-container>
-					<md-input-container class="md-block" flex-gt-sm>
-						<label>Test</label>
-						<md-select ng-model="vm.candidate.test">
-							<md-option ng-repeat="test in vm.tests" value="{{test._id}}">
-								{{test.name}}
-							</md-option>
-						</md-select>
-					</md-input-container>
-					<md-button ng-click="vm.createTestForCandidate()" class="md-primary md-raised">
-						Create a Test for Candidate
-					</md-button>
-				</form>
-			</div>
-		</md-content>
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Generate a new plain Test</b></div>
+		<div class="panel-body">
+			<form class="form-inline">
+				<div class="form-group">
+					<input class="form-control" ng-model="vm.test.name" placeholder="Name">
+				</div>
+				<button type="button" class="btn btn-default" ng-click="vm.addTest()">Add a new Test!</button>
+			</form>
+		</div>
 	</div>
-	<div>
-		<ul>
-			<li ng-repeat="userTest in vm.userTests">{{userTest._id}} --</li>
-		</ul>
+
+	<div class="panel panel-default">
+		<div class="panel-heading"><b>Prepare a test for Candidate</b></div>
+		<div class="panel-body">
+			<form name="userForm">
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="vm.candidate.firstName" placeholder="First Name">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="vm.candidate.lastName" placeholder="Last Name">
+				</div>
+				<div class="form-group">
+					<input type="email" class="form-control" ng-model="vm.candidate.email" placeholder="Email">
+				</div>
+				<div class="form-group">
+					<select class="form-control" ng-model="vm.candidate.test" placeholder="Select a test">
+						<option value="">Select a test</option>
+						<option ng-repeat="test in vm.tests" value="{{test._id}}">
+							{{test.name}}
+						</option>
+					</select>
+				</div>
+				<button type="button" class="btn btn-default" ng-click="vm.createTestForCandidate()">Create a Test for Candidate</button>
+			</form>
+		</div>
 	</div>
 </div>

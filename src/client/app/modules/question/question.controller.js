@@ -6,7 +6,7 @@
 		.controller('QuestionController', QuestionController);
 
 	/* @ngInject */
-	function QuestionController(testService, question, $state, $stateParams, $http, logger) {
+	function QuestionController(testService, question, $state, $stateParams, $scope, $http, logger) {
 		var vm = this;
 		vm.title = 'QuestionController';
 		vm.next = next;
@@ -14,6 +14,7 @@
 		///////////////
 		vm.question = question.question;
 		vm.answers = question.answer;
+		vm.snippet = question.snippet;
 		vm.id = question._id;
 
 		function next() {

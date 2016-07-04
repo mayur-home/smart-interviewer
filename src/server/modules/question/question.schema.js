@@ -6,6 +6,7 @@ var questionSchema = new Schema({
 	id: {type: Number, index: true},
 	question: String,
 	type: String,
+	snippet: String,
 	weightage: Number,
 	idealTime: Number,
 	answer: Array,

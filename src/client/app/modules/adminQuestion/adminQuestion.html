@@ -5,6 +5,12 @@
 			<label>What's your question?</label>
 			<input name="question" type="text" ng-model="vm.questionMaster.question">
 		</md-input-container>
+		<md-switch ng-model="vm.snippetSwitch" aria-label="Switch 6">
+			Snippet? {{vm.snippetSwitch}}
+		</md-switch>
+		<md-input-container ng-if="vm.snippetSwitch" class="md-block">
+			<textarea ckeditor="editorOptions" ng-model="vm.questionMaster.snippet"></textarea>
+		</md-input-container>
 		<md-input-container class="md-block">
 			<label>Question Type</label>
 			<md-select ng-model="vm.questionMaster.type">

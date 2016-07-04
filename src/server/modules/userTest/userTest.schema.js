@@ -7,7 +7,9 @@ var usertestSchema = new Schema({
 	email: String,
 	firstName: String,
 	lastName: String,
-	answers: []
+	answers: [],
+	isCompleted: Boolean,
+	report: Array
 });
 
 var Usertest = mongoose.model('Usertest', usertestSchema);
