@@ -8,7 +8,7 @@
 	/* @ngInject */
 	function AdminLoginController(session, $state, logger) {
 		var vm = this;
-		vm.signin = signin;
+		vm.login = login;
 
 		activate();
 
@@ -18,7 +18,7 @@
 			logger.info('Activated Admin Login controller');
 		}
 
-		function signin() {
+		function login() {
 			session.signin({
 					email: vm.admin.email,
 					password: vm.admin.password

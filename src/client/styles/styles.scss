@@ -4,6 +4,7 @@
 @import "vars/brand";
 @import "vars/navbar";
 @import "vars/typography";
+@import "vars/panel";
 
 /*********************************************
 * Importing Bootstrap with above variables.. *
@@ -20,7 +21,7 @@
 @import "blocks/body";
 
 // elements import
-@import "elements/material-button";
+@import "elements/button";
 
 // misc. import
-@import "modules/question/question";
+@import "modules/question";
