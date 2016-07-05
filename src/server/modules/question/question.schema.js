@@ -10,7 +10,8 @@ var questionSchema = new Schema({
 	weightage: Number,
 	idealTime: Number,
 	answer: Array,
-	tags: Array
+	tags: Array,
+	explanation: String
 });
 
 questionSchema.index({question: 'text'});
