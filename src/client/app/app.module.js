@@ -18,7 +18,6 @@
 			'testComplete',
 			'ngCkeditor'
 		])
-		.config(config)
 		.run(run)
 		.directive('snippet', ['$timeout', '$interpolate', function ($timeout, $interpolate) {
 			"use strict";
@@ -33,13 +32,6 @@
 				}
 			};
 		}]);
-
-	// TODO - Need to move to seprate config file.
-	/* @ngInject */
-	function config($mdThemingProvider) {
-		$mdThemingProvider.theme('default')
-			.primaryPalette('green');
-	}
 
 	// TODO - Need to move to seprate run file.
 	/* @ngInject */
