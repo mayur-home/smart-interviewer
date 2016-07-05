@@ -4,6 +4,7 @@ node_modules/
 bower_components/
 report/
 build/
+uploads/
 
 # other
 .tmp
