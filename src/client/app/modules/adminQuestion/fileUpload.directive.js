@@ -22,7 +22,7 @@
 							headers: {
 								'Content-Type': undefined
 							}
-					})
+						})
 						.then(uploadSuccess)
 						.catch(uploadFailure);
 

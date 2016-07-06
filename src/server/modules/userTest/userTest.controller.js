@@ -16,7 +16,7 @@ module.exports = {
 
 function createTest(req, res) {
 	Usertest.create(req.body, function(err, test) {
-		if(err) {
+		if (err) {
 			res.json(500, err);
 		}
 		res.json(test);
@@ -42,7 +42,7 @@ function getUserTests(req, res) {
 }
 
 function getTest(req, res) {
-	Usertest.findOne({ _id: req.params.id}, function(err, test) {
+	Usertest.findOne({_id: req.params.id}, function(err, test) {
 		if (err) {
 			res.json(500, err);
 		}
@@ -51,7 +51,7 @@ function getTest(req, res) {
 }
 
 function recordAnswer(req, res) {
-	Usertest.findOne({ _id: req.body.id}, function(err, test) {
+	Usertest.findOne({_id: req.body.id}, function(err, test) {
 		if (err) {
 			res.json(500, err);
 		}
@@ -62,7 +62,7 @@ function recordAnswer(req, res) {
 			}
 			test.report.push({
 				questionId: req.body.questionId,
-				isCorrect: _.find(question.answer, { id: parseInt(req.body.answerId) }).isCorrect
+				isCorrect: _.find(question.answer, {id: parseInt(req.body.answerId)}).isCorrect
 			});
 			test.save();
 			res.json({
@@ -73,7 +73,7 @@ function recordAnswer(req, res) {
 }
 
 function markCompleted(req, res) {
-	Usertest.findOne({ _id: req.body.id}, function(err, test) {
+	Usertest.findOne({_id: req.body.id}, function(err, test) {
 		if (err) {
 			res.json(500, err);
 		}
@@ -84,12 +84,10 @@ function markCompleted(req, res) {
 }
 
 function getReport(req, res) {
-	Usertest.findOne({ _id: req.params.id}, function(err, test) {
+	Usertest.findOne({_id: req.params.id}, function(err, test) {
 		if (err) {
 			res.json(500, err);
 		}
 		res.json(test.report);
 	});
 }
-
-

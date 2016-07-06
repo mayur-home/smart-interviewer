@@ -1,4 +1,5 @@
 /* jshint -W106,-W033 */
+/* jshint camelcase: false */
 var Question = require('./question.schema');
 var _ = require('lodash');
 var fs = require('fs');
@@ -44,7 +45,7 @@ function get(req, res) {
 }
 
 function getResult(req, res) {
-	Question.findOne({ _id: req.params.id }, function(err, result) {
+	Question.findOne({_id: req.params.id}, function(err, result) {
 		if (err) {
 			res.json(500, err);
 		}
@@ -95,7 +96,9 @@ function postFile(req, res) {
 		});
 
 	});
-	src.on('error', function(err) { res.send('error'); });
+	src.on('error', function(err) {
+		res.send('error');
+	});
 }
 
 ////////

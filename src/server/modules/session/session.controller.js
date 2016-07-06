@@ -1,4 +1,5 @@
 // jshint -W106
+/* jshint camelcase: false */
 'use strict';
 
 var mongoose = require('mongoose'),

@@ -1,8 +1,8 @@
 'use strict';
 
 var question = require('./question.controller');
-var multer  = require('multer');
-var upload = multer({ dest: 'uploads/' });
+var multer = require('multer');
+var upload = multer({dest: 'uploads/'});
 
 module.exports = function(router) {
 	router.post('/question', question.create);

@@ -19,7 +19,7 @@
 				vm.tests = data.data;
 			});
 
-		$http.get('/api/user/'+ vm.user._id +'/tests')
+		$http.get('/api/user/' + vm.user._id + '/tests')
 			.then(function(data) {
 				vm.userTests = data.data;
 			});
@@ -36,12 +36,12 @@
 
 		function createTestForCandidate() {
 			$http.post('/api/userTest', {
-				testId: vm.candidate.test,
-				email: vm.candidate.email,
-				firstName: vm.candidate.firstName,
-				lastName: vm.candidate.lastName,
-				creator: vm.user._id
-			})
+					testId: vm.candidate.test,
+					email: vm.candidate.email,
+					firstName: vm.candidate.firstName,
+					lastName: vm.candidate.lastName,
+					creator: vm.user._id
+				})
 				.then(createTestSuccess)
 				.catch(createTestFailure);
 
@@ -49,9 +49,9 @@
 				var data = test.data;
 				console.log(data);
 				$http.post('/api/user/test', {
-					userId: vm.user._id,
-					testId: data._id
-				})
+						userId: vm.user._id,
+						testId: data._id
+					})
 					.then(function() {
 						logger.info('User test created successfully');
 					});
