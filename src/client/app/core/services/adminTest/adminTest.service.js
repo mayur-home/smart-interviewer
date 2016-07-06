@@ -34,6 +34,7 @@
 		}
 
 		function getQuestions() {
+			var questions;
 			return $http.get('/api/test/questions?testId=' + getId())
 				.then(getQuestionsSuccess)
 				.catch(getQuestionsFailure);

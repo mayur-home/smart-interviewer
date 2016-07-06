@@ -57,6 +57,9 @@
     "globals": {
         "angular": false,
         "_": false,
-        "$": false
+        "$": false,
+        "htmlDecode": false,
+        "hljs": false,
+        "htmlEncode": false
     }
 }

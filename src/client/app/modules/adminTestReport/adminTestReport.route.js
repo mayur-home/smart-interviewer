@@ -24,7 +24,7 @@
 						},
 						resolve: {
 							/* @ngInject */
-							testData: function($http, $stateParams, $q) {
+							testData: function($http, $stateParams, $q, logger) {
 								return $http.get('/api//userTest/'+ $stateParams.id +'/report')
 									.then(testDataSuccess)
 									.catch(testDataFailure);

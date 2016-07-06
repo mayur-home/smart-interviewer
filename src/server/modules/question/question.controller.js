@@ -1,3 +1,4 @@
+/* jshint -W106,-W033 */
 var Question = require('./question.schema');
 var _ = require('lodash');
 var fs = require('fs');

@@ -20,7 +20,6 @@
 		])
 		.run(run)
 		.directive('snippet', ['$timeout', '$interpolate', function ($timeout, $interpolate) {
-			"use strict";
 			return {
 				restrict: 'E',
 				template: '<pre><code ng-transclude></code></pre>',
