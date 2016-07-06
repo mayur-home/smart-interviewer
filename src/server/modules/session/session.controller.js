@@ -1,5 +1,5 @@
 // jshint -W106
-/* jshint camelcase: false */
+/* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
 'use strict';
 
 var mongoose = require('mongoose'),

@@ -1,5 +1,5 @@
 /* jshint -W106,-W033 */
-/* jshint camelcase: false */
+/* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
 var Question = require('./question.schema');
 var _ = require('lodash');
 var fs = require('fs');
