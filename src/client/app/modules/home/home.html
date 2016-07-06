@@ -1,5 +1,5 @@
 <div class="jumbotron">
-	<h1>Hello, User!</h1>
+	<h1>Hello, {{vm.user.firstName}}!</h1>
 	<h3>Welcome to Smart Interviewer, App that makes your life easier.! ;)</h3>
-	<a type="button" class="btn btn-primary btn-lg" ui-sref="adminLogin">Log In</a>
+	<a ng-if="!vm.user" type="button" class="btn btn-primary btn-lg" ui-sref="adminLogin">Log In</a>
 </div>
