@@ -24,11 +24,19 @@
 			{text: 'Easy', value: 2},
 			{text: 'Very Easy', value: 1}
 		];
+
+		// Can be loaded through API. See examples: http://mbenford.github.io/ngTagsInput/demos -> second example
+		vm.autocompleteTags = [
+			{ text: 'java' },
+			{ text: 'angularjs' },
+			{ text: 'bootstrap' }
+		];
 		vm.submit = submit;
 		vm.addAnswer = addAnswer;
 		vm.removeAnswer = removeAnswer;
 		vm.answers = [];
 		vm.snippetSwitch = false;
+		vm.questionMaster = {};
 
 		vm.modelName = '<div class="dropup"> ' +
 		'<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" ' +
@@ -48,10 +56,15 @@
 		}
 
 		function submit() {
-			vm.questionMaster.answer = angular.copy(vm.answers);
+			vm.questionMaster.tags = [];
 
+			// collect tag text
 			// Make sure to send lowercase string for tags
-			vm.questionMaster.tags = ['angularjs', 'java 123', 'java'];
+			_.forEach(vm.tags, function(tag) {
+				vm.questionMaster.tags.push(tag.text);
+			});
+
+			vm.questionMaster.answer = angular.copy(vm.answers);
 
 			vm.questionMaster.snippet = vm.snippetSwitch ?
 				htmlEncode(vm.questionMaster.snippet) : null;

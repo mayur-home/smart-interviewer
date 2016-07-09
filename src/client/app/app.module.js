@@ -16,7 +16,8 @@
 			'test',
 			'question',
 			'testComplete',
-			'ngCkeditor'
+			'ngCkeditor',
+			'ngTagsInput'
 		])
 		.run(run)
 		.directive('snippet', ['$timeout', '$interpolate', function ($timeout, $interpolate) {

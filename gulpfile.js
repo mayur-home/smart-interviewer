@@ -4,6 +4,9 @@ var config = require('./gulp.config')();
 var del = require('del');
 var glob = require('glob');
 var gulp = require('gulp');
+var rename = require('gulp-rename');
+var print = require('gulp-print');
+var replace = require('gulp-replace-task');
 var path = require('path');
 var _ = require('lodash');
 var $ = require('gulp-load-plugins')({lazy: true});
@@ -99,6 +102,25 @@ gulp.task('images', ['clean-images'], function() {
 gulp.task('scss-watcher', function() {
 	gulp.watch([config.scss], ['styles']);
 });
+
+gulp.task('add-module', function() {
+	return gulp
+		.src('./template/*')
+		.pipe(print())
+		.pipe(replace({
+			variables: {
+				'module': args.module,
+				'controller': args.controller
+			}
+		}))
+		.pipe(rename(function (path) {
+			path.dirname = args.module;
+			path.basename = args.module +'.'+ path.basename;
+			path.extname = ".js"
+		}))
+		.pipe(gulp.dest('./src/client/app/modules/'));
+});
+
 
 /**
  * Create $templateCache from the html templates

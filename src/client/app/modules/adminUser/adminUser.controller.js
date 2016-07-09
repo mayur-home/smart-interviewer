@@ -27,7 +27,6 @@
 		///////////////
 
 		function addTest() {
-			console.log(vm.test.name);
 			$state.go('adminTest', {
 				testName: vm.test.name,
 				userId: vm.user._id

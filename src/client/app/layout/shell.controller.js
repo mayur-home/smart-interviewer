@@ -18,9 +18,13 @@
 
 		function activate() {
 			logger.success(config.appTitle + ' loaded!', null);
-			session.getLoginData().then(function(user) {
-				vm.username = user.email;
-			});
+			session.getLoginData()
+				.then(function(user) {
+					vm.username = user.email;
+				})
+				.catch(function() {
+					session.remove('user');
+				});
 		}
 
 		function loggedIn(event, user) {
