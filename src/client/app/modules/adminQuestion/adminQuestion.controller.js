@@ -71,7 +71,10 @@
 				vm.questionMaster.tags.push(tag.text);
 			});
 
-			vm.questionMaster.answer = angular.copy(vm.answers);
+			// selects answer which has answer title available
+			vm.questionMaster.answer = _.reject(vm.answers, function(answer) {
+				return !answer.answer;
+			});
 
 			vm.questionMaster.snippet = vm.snippetSwitch ?
 				htmlEncode(vm.questionMaster.snippet) : null;
