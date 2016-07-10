@@ -5,10 +5,15 @@
 		Add a new question
 	</div>
 	<div class="panel-body">
-		<form name="questionMasterForm">
-			<div class="form-group">
-				<input class="form-control" ng-model="vm.questionMaster.question"
-					   placeholder="What's your question?">
+		<form name="questionMasterForm" ng-submit="vm.submit()">
+			<div class="form-group has-feedback" ng-class="questionMasterForm.question.$valid && 'has-success'">
+				<input class="form-control" name="question" ng-model="vm.questionMaster.question"
+					   placeholder="What's your question?" minlength="5" required>
+				<i class="fa fa-check form-control-feedback" ng-if="questionMasterForm.question.$valid" aria-hidden="true"></i>
+				<div class="help-block" ng-messages="questionMasterForm.question.$error" ng-if="questionMasterForm.question.$touched">
+					<p ng-message="minlength">Question is too short.</p>
+					<p ng-message="required">Question is required.</p>
+				</div>
 			</div>
 			<div class="form-group">
 				<tags-input ng-model="vm.tags" placeholder="Tags ( java, angularjs etc. )">
@@ -23,30 +28,36 @@
 			<div class="form-group" ng-if="vm.snippetSwitch">
 				<textarea ckeditor="editorOptions" ng-model="vm.questionMaster.snippet"></textarea>
 			</div>
-			<div class="form-group">
-				<select ng-model="vm.questionMaster.type" class="form-control">
+			<div class="form-group has-feedback" ng-class="questionMasterForm.questionType.$valid && 'has-success'">
+				<select ng-model="vm.questionMaster.type" name="questionType" class="form-control" required>
 					<option value="">Select Question Type</option>
 					<option ng-repeat="item in vm.questionType" value="{{item.value}}">
 						{{item.text}}
 					</option>
 				</select>
+				<i class="fa fa-check form-control-feedback" ng-if="questionMasterForm.questionType.$valid" aria-hidden="true"></i>
+				<div class="help-block" ng-messages="questionMasterForm.questionType.$error" ng-if="questionMasterForm.questionType.$touched">
+					<p ng-message="required">Question Type is required.</p>
+				</div>
 			</div>
 			<answer-entry></answer-entry>
-			<div class="form-group">
-				<select ng-model="vm.questionMaster.weightage" class="form-control">
+			<div class="form-group has-feedback" ng-class="questionMasterForm.weightage.$valid && 'has-success'">
+				<select ng-model="vm.questionMaster.weightage" name="weightage" class="form-control" required>
 					<option value="">Select Weightage</option>
 					<option ng-repeat="item in vm.weightage" value="{{item.value}}">
 						{{item.text}}
 					</option>
 				</select>
+				<i class="fa fa-check form-control-feedback" ng-if="questionMasterForm.weightage.$valid" aria-hidden="true"></i>
+				<div class="help-block" ng-messages="questionMasterForm.weightage.$error" ng-if="questionMasterForm.weightage.$touched">
+					<p ng-message="required">Weightage Type is required.</p>
+				</div>
 			</div>
 			<div class="form-group">
 				<input type="number" class="form-control"
 					   ng-model="vm.questionMaster.idealTime" placeholder="Ideal Timing">
 			</div>
-			<button class="btn btn-primary"
-					ng-click="vm.submit()">Save Your Question!
-			</button>
+			<button type="submit" class="btn btn-primary">Save Your Question!</button>
 		</form>
 	</div>
 </div>

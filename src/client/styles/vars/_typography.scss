@@ -3,3 +3,10 @@ $application-font-style: "Open Sans", "Segoe UI", arial; //setting application f
 
 // overriding application style
 $font-family-sans-serif: $application-font-style;
+
+p[ng-message] {
+	color: #ff0000;
+	font-size: 11px;
+	padding-left: 5px;
+	margin-top: -3px;
+}
