@@ -1,23 +1,34 @@
-<div layout="row" layout-align="center">
-	<md-content flex="90">
-		<div layout="row">
-			<div flex="45">
-				<md-input-container class="md-block">
-					<label>Search question?</label>
-					<input name="search" type="text" ng-model="vm.search">
-				</md-input-container>
-				<md-list-item class="secondary-button-padding" ng-repeat="item in vm.searchedQuestions">
-					<p>{{item.question}}</p>
-					<p><span ng-repeat="tag in item.tags">{{tag}}, </span></p>
-					<md-button class="md-secondary" ng-click="vm.addQuestion(item._id)">Add</md-button>
-				</md-list-item>
-			</div>
-			<div flex="45">
-				<md-list-item class="secondary-button-padding" ng-repeat="item in vm.questions">
-					<p>{{item.question}}</p>
-					<md-button class="md-raised" ng-click="vm.deleteQuestion(item._id)">Delete</md-button>
-				</md-list-item>
-			</div>
-		</div>
-	</md-content>
+<h2>Select questions for <small>{{vm.testName}}</small></h2>
+<hr>
+<div class="row">
+	<div class="col-sm-6">
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="item in vm.questions">
+				<p>{{item.question}}</p>
+				<button type="button" class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(item._id)">Remove</button>
+			</li>
+		</ul>
+	</div>
+	<div class="col-sm-6">
+		<input type="text" class="form-control" name="search" ng-model="vm.search" placeholder="Search question">
+		<span id="helpBlock" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+		<hr>
+
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="item in vm.searchedQuestions">
+				<p>{{item.question}}</p>
+				<p>
+					<small><b>Options:</b>
+						<span ng-repeat="ans in item.answer">
+							{{ans.answer}}
+							<i class="fa fa-check-square-o" ng-if="ans.isCorrect" aria-hidden="true"></i>
+							<i ng-if="!$last">,</i>
+						</span>
+					</small>
+				</p>
+
+				<button type="button" class="btn btn-success btn-xs" ng-click="vm.addQuestion(item._id)">Add</button>
+			</li>
+		</ul>
+	</div>
 </div>

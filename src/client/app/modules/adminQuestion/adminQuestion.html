@@ -1,60 +1,60 @@
-<div class="container-fluid">
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			Question Entry
-		</div>
-		<div class="panel-body">
-			<form name="questionMasterForm">
-				<div class="form-group">
-					<input class="form-control" ng-model="vm.questionMaster.question"
-						   placeholder="What's your question?">
-				</div>
-				<div class="form-group">
-					<tags-input ng-model="vm.tags" placeholder="Tags ( java, angularjs etc. )">
-						<auto-complete source="vm.autocompleteTags"></auto-complete>
-					</tags-input>
-				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" ng-model="vm.snippetSwitch"> Snippet?
-					</label>
-				</div>
-				<div class="form-group" ng-if="vm.snippetSwitch">
-					<textarea ckeditor="editorOptions" ng-model="vm.questionMaster.snippet"></textarea>
-				</div>
-				<div class="form-group">
-					<select ng-model="vm.questionMaster.type" class="form-control">
-						<option value="">Select Question Type</option>
-						<option ng-repeat="item in vm.questionType" value="{{item.value}}">
-							{{item.text}}
-						</option>
-					</select>
-				</div>
-				<answer-entry></answer-entry>
-				<div class="form-group">
-					<select ng-model="vm.questionMaster.weightage" class="form-control">
-						<option value="">Select Weightage</option>
-						<option ng-repeat="item in vm.weightage" value="{{item.value}}">
-							{{item.text}}
-						</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<input type="number" class="form-control"
-						   ng-model="vm.questionMaster.idealTime" placeholder="Ideal Timing">
-				</div>
-				<button class="btn btn-primary"
-						ng-click="vm.submit()">Save Your Question!
-				</button>
-			</form>
-		</div>
+<h2>Add Question</h2>
+<hr>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Add a new question
 	</div>
-	<div class="panel panel-danger">
-		<div class="panel-heading">
-			Quickly Upload Question using Excel
-		</div>
-		<div class="panel-body">
-			<file-upload></file-upload>
-		</div>
+	<div class="panel-body">
+		<form name="questionMasterForm">
+			<div class="form-group">
+				<input class="form-control" ng-model="vm.questionMaster.question"
+					   placeholder="What's your question?">
+			</div>
+			<div class="form-group">
+				<tags-input ng-model="vm.tags" placeholder="Tags ( java, angularjs etc. )">
+					<auto-complete source="vm.autocompleteTags"></auto-complete>
+				</tags-input>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" ng-model="vm.snippetSwitch"> Snippet?
+				</label>
+			</div>
+			<div class="form-group" ng-if="vm.snippetSwitch">
+				<textarea ckeditor="editorOptions" ng-model="vm.questionMaster.snippet"></textarea>
+			</div>
+			<div class="form-group">
+				<select ng-model="vm.questionMaster.type" class="form-control">
+					<option value="">Select Question Type</option>
+					<option ng-repeat="item in vm.questionType" value="{{item.value}}">
+						{{item.text}}
+					</option>
+				</select>
+			</div>
+			<answer-entry></answer-entry>
+			<div class="form-group">
+				<select ng-model="vm.questionMaster.weightage" class="form-control">
+					<option value="">Select Weightage</option>
+					<option ng-repeat="item in vm.weightage" value="{{item.value}}">
+						{{item.text}}
+					</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<input type="number" class="form-control"
+					   ng-model="vm.questionMaster.idealTime" placeholder="Ideal Timing">
+			</div>
+			<button class="btn btn-primary"
+					ng-click="vm.submit()">Save Your Question!
+			</button>
+		</form>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Upload Questions from Excel
+	</div>
+	<div class="panel-body">
+		<file-upload></file-upload>
 	</div>
 </div>

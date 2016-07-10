@@ -1,37 +1,35 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<i class="fa fa-lock" aria-hidden="true"></i> Log In
-				</div>
-				<div class="panel-body">
-					<form name="loginForm">
-						<div class="form-group"
-							 ng-class="{ 'has-error': loginForm.email.$touched && loginForm.email.$invalid }">
-							<input type="text" class="form-control" name="email"
-								   placeholder="Email" ng-model="vm.admin.email"
-								   required autofocus>
-							<div ng-messages="loginForm.email.$error"
-								 ng-show="loginForm.email.$invalid && loginForm.email.$touched">
-								<span class="help-block" ng-message="required">Email is required.</span>
-							</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<i class="fa fa-lock" aria-hidden="true"></i> Log In
+			</div>
+			<div class="panel-body">
+				<form name="loginForm" ng-submit="vm.login()">
+					<div class="form-group"
+						 ng-class="{ 'has-error': loginForm.email.$touched && loginForm.email.$invalid }">
+						<input type="text" class="form-control" name="email"
+							   placeholder="Email" ng-model="vm.admin.email"
+							   required autofocus>
+						<div ng-messages="loginForm.email.$error"
+							 ng-show="loginForm.email.$invalid && loginForm.email.$touched">
+							<span class="help-block" ng-message="required">Email is required.</span>
 						</div>
-						<div class="form-group"
-							 ng-class="{ 'has-error': loginForm.password.$touched && loginForm.password.$invalid }">
-							<input type="password" class="form-control" name="password"
-								   placeholder="Password" ng-model="vm.admin.password" required>
-							<div ng-messages="loginForm.password.$error"
-								 ng-show="loginForm.password.$invalid && loginForm.password.$touched">
-								<span class="help-block" ng-message="required">Password is required.</span>
-							</div>
+					</div>
+					<div class="form-group"
+						 ng-class="{ 'has-error': loginForm.password.$touched && loginForm.password.$invalid }">
+						<input type="password" class="form-control" name="password"
+							   placeholder="Password" ng-model="vm.admin.password" required>
+						<div ng-messages="loginForm.password.$error"
+							 ng-show="loginForm.password.$invalid && loginForm.password.$touched">
+							<span class="help-block" ng-message="required">Password is required.</span>
 						</div>
-						<button class="btn btn-primary"
-								type="button" ng-disabled="loginForm.$invalid"
-								ng-click="vm.login()">Log In
-						</button>
-					</form>
-				</div>
+					</div>
+					<button class="btn btn-primary"
+							type="submit" ng-disabled="loginForm.$invalid">
+						Log In
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

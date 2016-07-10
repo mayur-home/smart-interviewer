@@ -1,57 +1,26 @@
-<div ng-if="vm.questionMaster.type">
-	<div ng-if="vm.questionMaster.type === 'MSQ' || vm.questionMaster.type === 'SSQ'">
-		<h4>Add Answers</h4>
-		<div class="row">
-			<div class="form-group col-md-4">
-				<input type="text" ng-model="vm.answerModel.answer" placeholder="Answer?"
-					   class="form-control">
-			</div>
-			<div class="form-group col-md-4">
-				<label class="radio-inline">
-					<input type="radio" name="isCorrect" value="true" ng-model="vm.answerModel.isCorrect"> Yes
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="isCorrect" value="false" ng-model="vm.answerModel.isCorrect"> No
-				</label>
-			</div>
-			<div class="form-group col-md-4">
-				<button class="btn btn-primary" ng-click="vm.addAnswer()">
-					<i class="fa fa-plus-circle" aria-hidden="true"></i> Add
+<div class="panel panel-default" ng-if="vm.questionMaster.type === 'MSQ' || vm.questionMaster.type === 'SSQ'">
+	<div class="panel-heading">Answer options</div>
+	<div class="panel-body">
+		<div>
+			<div>
+				<div class="form-group input-group" ng-repeat="item in vm.answers">
+					<input type="text" class="form-control" ng-model="item.answer" placeholder="Answer text">
+					<span class="input-group-addon">
+						<input type="checkbox" ng-model="item.isCorrect"> &nbsp; Is it true option?
+					</span>
+					<span class="input-group-addon"><i class="fa fa-trash" aria-hidden="true" ng-click="vm.removeAnswer($index)"></i></span>
+				</div>
+
+				<button class="btn btn-primary" ng-click="vm.addAnswerOption()">
+					<i class="fa fa-plus-circle" aria-hidden="true"></i> Add more option
 				</button>
 			</div>
 		</div>
-		<div ng-if="vm.answers.length >= 1">
-			<h5>Answers.!</h5>
-			<table class="table">
-				<tbody>
-				<tr ng-repeat="item in vm.answers">
-					<td>
-						<div class="checkbox" ng-if="vm.questionMaster.type === 'MSQ'">
-							<label class="checkbox-inline">
-								<input type="checkbox" ng-model="item.isCorrect" ng-disabled="true">
-								{{item.answer}}
-							</label>
-						</div>
-						<div class="radio" ng-if="vm.questionMaster.type === 'SSQ'">
-							<label class="radio-inline">
-								<input type="radio" ng-model="item.isCorrect" ng-disabled="true" ng-value="true">
-								{{item.answer}}
-							</label>
-						</div>
-					</td>
-					<td>
-						<button class="btn btn-danger" ng-click="vm.removeAnswer($index)">
-							<i class="fa fa-trash-o" aria-hidden="true"></i>
-						</button>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
 	</div>
-	<div ng-if="vm.questionMaster.type === 'DQ'" class="form-group">
-		<label ng-hide="true"
-			   ng-init="vm.answers[0].isCorrect = true">Descriptive Answer</label>
-		<textarea ng-model="vm.answers[0].answer" class="form-control" placeholder="Descriptive Answer"></textarea>
-	</div>
+</div>
+
+<div ng-if="vm.questionMaster.type === 'DQ'" class="form-group">
+	<label ng-hide="true"
+		   ng-init="vm.answers[0].isCorrect = true">Descriptive Answer</label>
+	<textarea ng-model="vm.answers[0].answer" class="form-control" placeholder="Descriptive Answer"></textarea>
 </div>

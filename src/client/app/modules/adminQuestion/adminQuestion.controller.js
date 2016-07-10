@@ -32,9 +32,15 @@
 			{ text: 'bootstrap' }
 		];
 		vm.submit = submit;
-		vm.addAnswer = addAnswer;
+		vm.addAnswerOption = addAnswerOption;
 		vm.removeAnswer = removeAnswer;
-		vm.answers = [];
+		var answerOptions = [{
+			id: answerIdCounter++,
+			isCorrect: true
+		}, {
+			id: answerIdCounter++,
+			isCorrect: false
+		}];
 		vm.snippetSwitch = false;
 		vm.questionMaster = {};
 
@@ -52,6 +58,7 @@
 		////////////////
 
 		function activate() {
+			vm.answers = answerOptions;
 			logger.success('Activated Question Master View.');
 		}
 
@@ -72,20 +79,17 @@
 			adminQuestionService.save(vm.questionMaster)
 				.then(function() {
 					vm.questionMaster = {};
-					vm.answerModel = {};
+					vm.answers = answerOptions;
 					logger.success('Your record saved..!');
 				});
 		}
 
-		function addAnswer() {
+		function addAnswerOption() {
 			var answer = {
-				answer: vm.answerModel.answer,
-				isCorrect: vm.answerModel.isCorrect === 'true',
+				isCorrect: false,
 				id: ++answerIdCounter
 			};
 			vm.answers.push(answer);
-			vm.answerModel = {};
-			logger.success('Answer added.!');
 		}
 
 		function removeAnswer($index) {

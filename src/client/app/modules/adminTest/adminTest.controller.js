@@ -11,6 +11,7 @@
 		var testId = testData._id;
 		adminTestService.setId(testId);
 		vm.title = 'AdminTestController';
+		vm.testName = testData.name;
 		vm.addQuestion = addQuestion;
 		vm.deleteQuestion = deleteQuestion;
 		vm.questions = [];
