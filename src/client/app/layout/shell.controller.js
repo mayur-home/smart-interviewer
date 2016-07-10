@@ -6,7 +6,7 @@
 		.controller('ShellController', ShellController);
 
 	/* @ngInject */
-	function ShellController(config, $rootScope, session, logger) {
+	function ShellController(config, $rootScope, session, $state, logger) {
 		var vm = this;
 
 		$rootScope.$on('login', loggedIn);
@@ -24,6 +24,7 @@
 				})
 				.catch(function() {
 					session.remove('user');
+					$state.go('adminLogin');
 				});
 		}
 
