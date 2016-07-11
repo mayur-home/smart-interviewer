@@ -1,0 +1,6 @@
+// error state styles
+.has-error {
+	& .help-block {
+		font-size: $application-error-font-size; // overriding font-size for field-level error messages.
+	}
+}

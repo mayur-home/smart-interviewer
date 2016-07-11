@@ -16,6 +16,7 @@
 *********************************************/
 //variables import
 @import "vars/body";
+@import "vars/error";
 
 //blocks import
 @import "blocks/body";
@@ -23,6 +24,9 @@
 // elements import
 @import "elements/button";
 @import "elements/tag-input";
+
+// modifiers import
+@import "modifiers/error";
 
 // misc. import
 @import "modules/question";
