@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
 var Schema = mongoose.Schema;
 var questionSchema = new Schema({
@@ -16,6 +17,7 @@ var questionSchema = new Schema({
 
 questionSchema.index({question: 'text'});
 questionSchema.index({tags: 1});
+questionSchema.plugin(mongoosePaginate);
 
 var Question = mongoose.model('Question', questionSchema);
 

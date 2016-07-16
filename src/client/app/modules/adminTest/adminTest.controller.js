@@ -9,22 +9,39 @@
 	function AdminTestController($scope, $http, adminTestService, testData, $q, logger) {
 		var vm = this;
 		var testId = testData._id;
+
 		adminTestService.setId(testId);
 		vm.title = 'AdminTestController';
 		vm.testName = testData.name;
 		vm.addQuestion = addQuestion;
 		vm.deleteQuestion = deleteQuestion;
+		vm.getQuestions = getQuestions;
 		vm.questions = [];
 
+		$scope.range = function(min, max, step) {
+			step = step || 1;
+			var input = [];
+			for (var i = min; i <= max; i += step) {
+				input.push(i);
+			}
+			return input;
+		};
+
 		$scope.$watch('vm.search', function(newVal, oldVal) {
-			getQuestions(newVal);
+			getQuestions();
 		});
 
 		/////////////////
 
-		function getQuestions(query) {
-			$http.get('/api/search/question?search=' + query).then(function(questions) {
-				vm.searchedQuestions = questions.data;
+		function getQuestions(page) {
+			var url = '/api/search/question?';
+			url += ('search=' + vm.search);
+			url += ('&page=' + page || 1);
+
+			$http.get(url).then(function(questions) {
+				vm.searchedQuestions = questions.data.docs;
+				vm.pages = questions.data.pages;
+				vm.currentPage = parseInt(questions.data.page);
 			});
 		}
 

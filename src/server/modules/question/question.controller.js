@@ -57,13 +57,12 @@ function getResult(req, res) {
 }
 
 function getSerchResult(req, res) {
-	Question.find({
+	Question.paginate({
 			$or: [
 				{tags: {$in: [(req.query.search).toLowerCase()]}},
 				{$text: {$search: req.query.search}}
 			]
-		})
-		.exec(function(err, results) {
+		}, {page: req.query.page, limit: 5}, function(err, results) {
 			if (err) {
 				res.json(500, err);
 			}

@@ -19,6 +19,7 @@
     "mongo-xlsx": "^1.0.12",
     "mongodb": "^2.1.18",
     "mongoose": "^4.5.0",
+    "mongoose-paginate": "^5.0.0",
     "morgan": "^1.1.1",
     "multer": "^1.1.0",
     "passport": "^0.3.2",
