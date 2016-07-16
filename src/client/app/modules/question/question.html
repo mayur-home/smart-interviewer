@@ -3,15 +3,15 @@
 	<snippet ng-if="vm.snippet">{{vm.snippet}}</snippet>
 	<div class="question-answers">
 		<p><strong>Answer:</strong></p>
-		<md-radio-group ng-model="vm.answerId" class="answer-container">
-			<md-radio-button value="{{answer.id}}" ng-repeat="answer in vm.answers">
-				{{answer.answer}}
-			</md-radio-button>
-		</md-radio-group>
+		<div class="radio" ng-repeat="answer in vm.answers">
+			<label>
+				<input type="radio" ng-model="vm.answerId" value="{{answer.id}}" name="answer-options"> {{answer.answer}}
+			</label>
+		</div>
 	</div>
 	<div class="question-actions">
-		<md-button ng-click="vm.next()" class="md-primary md-raised pull-right">
+		<button type="button" ng-click="vm.next()" class="pull-right">
 			Save & Continue..
-		</md-button>
+		</button>
 	</div>
 </div>

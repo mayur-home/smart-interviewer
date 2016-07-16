@@ -1,9 +1,33 @@
 <div class="container">
-	Test Report
+	<h1>Test Report</h1>
 
-	<ul>
-		<li ng-repeat="answer in vm.testData">
-			{{answer.questionId}} -- {{answer.isCorrect}}
-		</li>
-	</ul>
+	<div class="table-responsive">
+		<table class="table table-bordered">
+			<thead>
+			<th>Question</th>
+			<th>Answer options</th>
+			<th>Type</th>
+			<th>Is Correct?</th>
+			</thead>
+			<tbody>
+			<tr ng-repeat="answer in vm.testData">
+				<td>
+					<p>{{answer.question}}</p>
+				</td>
+				<td>
+					<div ng-if="answer.answerOptions">
+						<ul>
+							<li ng-repeat="option in answer.answerOptions">{{option.answer}}</li>
+						</ul>
+					</div>
+				</td>
+				<td>{{answer.questionType}}</td>
+				<td>
+					<span class="label label-success" ng-if="answer.isCorrect">Correct</span>
+					<span class="label label-danger" ng-if="!answer.isCorrect">Wrong</span>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

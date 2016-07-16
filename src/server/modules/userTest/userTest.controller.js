@@ -1,6 +1,7 @@
 var Usertest = require('./userTest.schema');
 var Question = require('../question/question.schema');
 var _ = require('lodash');
+var Q = require('q');
 
 module.exports = {
 	getAll: getAll,
@@ -88,6 +89,33 @@ function getReport(req, res) {
 		if (err) {
 			res.json(500, err);
 		}
-		res.json(test.report);
+
+		generateReport(test)
+			.then(function(report) {
+				console.log('respolving now');
+				res.json(report);
+			});
 	});
+}
+
+function generateReport(test) {
+	var defer = new Q.defer();
+
+	_.forEach(test.report, function(entry, index) {
+		Question.findOne({_id: entry.questionId}, function(err, question) {
+			entry.answerOptions = question.answer;
+			entry.question = question.question;
+			entry.questionType = question.type;
+		})
+			.then(function() {
+				if(index+1 >= test.report.length) {
+					console.log('quitung now...');
+					defer.resolve(test.report);
+				}
+			});
+
+
+	});
+
+	return defer.promise;
 }

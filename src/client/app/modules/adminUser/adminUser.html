@@ -1,63 +1,68 @@
 <h2>Welcome Back, {{vm.user.firstName}}!</h2>
 <hr>
-<div class="panel panel-default">
-	<div class="panel-heading"><b>Usertest Status</b></div>
-	<div class="panel-body">
-		<table class="table">
-			<thead>
-			<tr>
-				<th>ID</th>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Status</th>
-			</tr>
-			</thead>
-			<tbody>
-			<tr ng-repeat="userTest in vm.userTests">
-				<td>{{userTest._id}}</td>
-				<td>{{userTest.firstName}}</td>
-				<td>{{userTest.lastName}}</td>
-				<td><span ng-if="userTest.isCompleted" ng-click="vm.showTestReport(userTest._id)">Completed</span></td>
-			</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
+<div class="row">
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Generate a new plain Test</b></div>
+			<div class="panel-body">
+				<form class="form-inline">
+					<div class="form-group">
+						<input class="form-control" ng-model="vm.test.name" placeholder="Name">
+					</div>
+					<button type="button" class="btn btn-default" ng-click="vm.addTest()">Add a new Test!</button>
+				</form>
+			</div>
+		</div>
 
-<div class="panel panel-default">
-	<div class="panel-heading"><b>Generate a new plain Test</b></div>
-	<div class="panel-body">
-		<form class="form-inline">
-			<div class="form-group">
-				<input class="form-control" ng-model="vm.test.name" placeholder="Name">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Prepare a test for Candidate</b></div>
+			<div class="panel-body">
+				<form name="userForm">
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="vm.candidate.firstName" placeholder="First Name">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="vm.candidate.lastName" placeholder="Last Name">
+					</div>
+					<div class="form-group">
+						<input type="email" class="form-control" ng-model="vm.candidate.email" placeholder="Email">
+					</div>
+					<div class="form-group">
+						<select class="form-control" ng-model="vm.candidate.test" placeholder="Select a test">
+							<option value="">Select a test</option>
+							<option ng-repeat="test in vm.tests" value="{{test._id}}">
+								{{test.name}}
+							</option>
+						</select>
+					</div>
+					<button type="button" class="btn btn-default" ng-click="vm.createTestForCandidate()">Create a Test for Candidate</button>
+				</form>
 			</div>
-			<button type="button" class="btn btn-default" ng-click="vm.addTest()">Add a new Test!</button>
-		</form>
+		</div>
 	</div>
-</div>
-
-<div class="panel panel-default">
-	<div class="panel-heading"><b>Prepare a test for Candidate</b></div>
-	<div class="panel-body">
-		<form name="userForm">
-			<div class="form-group">
-				<input type="text" class="form-control" ng-model="vm.candidate.firstName" placeholder="First Name">
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading"><b>Usertest Status</b></div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+					<tr>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Status</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="userTest in vm.userTests">
+						<td>{{userTest._id}}</td>
+						<td>{{userTest.firstName}}</td>
+						<td>{{userTest.lastName}}</td>
+						<td><span ng-if="userTest.isCompleted" ng-click="vm.showTestReport(userTest._id)">Completed</span></td>
+					</tr>
+					</tbody>
+				</table>
 			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" ng-model="vm.candidate.lastName" placeholder="Last Name">
-			</div>
-			<div class="form-group">
-				<input type="email" class="form-control" ng-model="vm.candidate.email" placeholder="Email">
-			</div>
-			<div class="form-group">
-				<select class="form-control" ng-model="vm.candidate.test" placeholder="Select a test">
-					<option value="">Select a test</option>
-					<option ng-repeat="test in vm.tests" value="{{test._id}}">
-						{{test.name}}
-					</option>
-				</select>
-			</div>
-			<button type="button" class="btn btn-default" ng-click="vm.createTestForCandidate()">Create a Test for Candidate</button>
-		</form>
+		</div>
 	</div>
 </div>
