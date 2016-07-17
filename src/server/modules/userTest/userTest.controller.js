@@ -92,7 +92,6 @@ function getReport(req, res) {
 
 		generateReport(test)
 			.then(function(report) {
-				console.log('respolving now');
 				res.json(report);
 			});
 	});
@@ -109,12 +108,9 @@ function generateReport(test) {
 		})
 			.then(function() {
 				if(index+1 >= test.report.length) {
-					console.log('quitung now...');
 					defer.resolve(test.report);
 				}
 			});
-
-
 	});
 
 	return defer.promise;

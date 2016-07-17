@@ -34,13 +34,22 @@
 		}
 
 		function createTestForCandidate() {
-			$http.post('/api/userTest', {
-					testId: vm.candidate.test,
-					email: vm.candidate.email,
-					firstName: vm.candidate.firstName,
-					lastName: vm.candidate.lastName,
-					creator: vm.user._id
-				})
+			var request = {
+				testId: vm.candidate.test,
+				email: vm.candidate.email,
+				firstName: vm.candidate.firstName,
+				lastName: vm.candidate.lastName,
+				creator: vm.user._id,
+				type: vm.candidate.testType
+			};
+
+			if (vm.candidate.testType === 'smart') {
+				request.tags = _.map(vm.candidate.smartTags, function(tag) {
+					return tag.text;
+				});
+			}
+
+			$http.post('/api/userTest', request)
 				.then(createTestSuccess)
 				.catch(createTestFailure);
 

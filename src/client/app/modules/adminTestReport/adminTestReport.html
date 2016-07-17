@@ -10,14 +10,16 @@
 			<th>Is Correct?</th>
 			</thead>
 			<tbody>
-			<tr ng-repeat="answer in vm.testData">
+			<tr ng-repeat="answer in vm.testData" ng-class="{'success' : answer.isCorrect}">
 				<td>
 					<p>{{answer.question}}</p>
 				</td>
 				<td>
 					<div ng-if="answer.answerOptions">
-						<ul>
-							<li ng-repeat="option in answer.answerOptions">{{option.answer}}</li>
+						<ul class="list-style">
+							<li ng-repeat="option in answer.answerOptions">
+								{{option.answer}} <i class="fa fa-check-square-o" ng-if="option.isCorrect" aria-hidden="true"></i>
+							</li>
 						</ul>
 					</div>
 				</td>

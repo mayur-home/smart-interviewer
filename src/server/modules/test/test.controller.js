@@ -26,8 +26,11 @@ function addQuestion(req, res) {
 		if (err) {
 			res.json(500, err);
 		}
-		test.questions.push(req.body.questionId);
-		test.save();
+
+		if ((test.questions).indexOf(req.body.questionId) <= -1) {
+			test.questions.push(req.body.questionId);
+			test.save();
+		}
 
 		Question.findOne({_id: req.body.questionId}, function(err, result) {
 			if (err) {

@@ -28,6 +28,16 @@
 						<input type="email" class="form-control" ng-model="vm.candidate.email" placeholder="Email">
 					</div>
 					<div class="form-group">
+						<select class="form-control" ng-model="vm.candidate.testType" placeholder="Select test type">
+							<option value="">Select a test</option>
+							<option value="smart">Smart Test</option>
+							<option value="fixed">Fixed Test</option>
+						</select>
+					</div>
+					<div class="form-group" ng-if="vm.candidate.testType === 'smart'">
+						<tags-input ng-model="vm.candidate.smartTags" placeholder="Tags ( java, angularjs etc. )"></tags-input>
+					</div>
+					<div class="form-group" ng-if="vm.candidate.testType === 'fixed'">
 						<select class="form-control" ng-model="vm.candidate.test" placeholder="Select a test">
 							<option value="">Select a test</option>
 							<option ng-repeat="test in vm.tests" value="{{test._id}}">
