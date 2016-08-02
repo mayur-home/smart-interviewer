@@ -5,7 +5,7 @@
 		Add a new question
 	</div>
 	<div class="panel-body">
-		<form name="questionMasterForm" ng-submit="vm.submit()">
+		<form name="questionMasterForm" ng-submit="vm.submit()" enctype="multipart/form-data">
 			<div class="form-group has-feedback"
 				 ng-class="{ 'has-error': questionMasterForm.question.$touched && questionMasterForm.question.$invalid, 'has-success': questionMasterForm.question.$valid}">
 				<input class="form-control" name="question" ng-model="vm.questionMaster.question"
