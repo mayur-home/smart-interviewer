@@ -35,7 +35,7 @@
 						</select>
 					</div>
 					<div class="form-group" ng-if="vm.candidate.testType === 'smart'">
-						<tags-input ng-model="vm.candidate.smartTags" placeholder="Tags ( java, angularjs etc. )"></tags-input>
+						<tags-input ng-model="vm.candidate.primarySmartTags" placeholder="Tags ( java, angularjs etc. )"></tags-input>
 					</div>
 					<div class="form-group" ng-if="vm.candidate.testType === 'fixed'">
 						<select class="form-control" ng-model="vm.candidate.test" placeholder="Select a test">
@@ -54,24 +54,35 @@
 		<div class="panel panel-default">
 			<div class="panel-heading"><b>Usertest Status</b></div>
 			<div class="panel-body">
-				<table class="table">
-					<thead>
-					<tr>
-						<th>ID</th>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr ng-repeat="userTest in vm.userTests">
-						<td>{{userTest._id}}</td>
-						<td>{{userTest.firstName}}</td>
-						<td>{{userTest.lastName}}</td>
-						<td><span ng-if="userTest.isCompleted" ng-click="vm.showTestReport(userTest._id)">Completed</span></td>
-					</tr>
-					</tbody>
-				</table>
+				<div class="table-responsive teststatus-table">
+					<table class="table">
+						<thead>
+						<tr>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Status</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="userTest in vm.userTests" ng-class="{'success' : userTest.isCompleted}">
+							<td>{{userTest.firstName}}</td>
+							<td>{{userTest.lastName}}</td>
+							<td>
+								<div ng-if="userTest.isCompleted">
+									<span>
+										<i class="fa fa-check" aria-hidden="true"></i>
+									</span>
+									<span>
+										<button type="button" class="btn btn-default btn-xs" ng-click="vm.showTestReport(userTest._id)">
+											Show report
+										</button>
+									</span>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

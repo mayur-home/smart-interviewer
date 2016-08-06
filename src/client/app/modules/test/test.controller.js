@@ -6,21 +6,26 @@
 		.controller('testController', testController);
 
 	/* @ngInject */
-	function testController(test, testService, adminTestService, $stateParams, $state, $http, logger) {
+	function testController(test, testService, $stateParams, $state, $http, logger) {
 		// jshint validthis: true
 		var vm = this;
 		vm.startTest = startTest;
 		vm.firstName = test.firstName;
 
 		testService.setUserTestId(test._id);
+		testService.setTestType(test.type);
+		testService.setPrimaryTags(test.primaryTags ? (test.primaryTags).join(',') : '');
+		testService.resetQuestionCounter();
 
-		console.log(test);
-		$http.get('/api/test/' + test.testId)
-			.then(testSuccess)
-			.catch(testFailure);
+		// Get the question list and store it in cache(testService) in
+		// case of FIXED test
+		if (test.type !== 'smart') {
+			$http.get('/api/test/' + test.testId)
+				.then(testSuccess)
+				.catch(testFailure);
+		}
 
 		function testSuccess(data) {
-			console.log(data.data);
 			testService.setId(data.data._id);
 			testService.setQuestions(data.data.questions);
 		}
@@ -32,6 +37,14 @@
 		///////////////////
 
 		function startTest() {
+			if (test.type === 'smart') {
+				testService.getNextSmartQuestion()
+					.then(function(response) {
+						var nextQuestion = response.id;
+						$state.go('question', {testId: test._id, id: nextQuestion});
+					});
+				return;
+			}
 			$state.go('question', {testId: testService.getId(), id: testService.getNextQuestion().value});
 		}
 	}

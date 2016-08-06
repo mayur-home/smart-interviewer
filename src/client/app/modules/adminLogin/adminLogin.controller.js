@@ -9,6 +9,7 @@
 	function AdminLoginController(session, $state, logger) {
 		var vm = this;
 		vm.login = login;
+		vm.register = register;
 
 		activate();
 
@@ -31,9 +32,16 @@
 				$state.go('adminUser');
 			}
 
-			function loginFailure() {
+			function loginFailure(err) {
+				// vm.loginError
+				vm.errors = err.errors;
+				console.log(vm.errors);
 				logger.info('Login failed');
 			}
+		}
+
+		function register() {
+			$state.go('adminRegistration');
 		}
 	}
 

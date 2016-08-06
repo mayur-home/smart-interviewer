@@ -1,28 +1,28 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 col-sm-offset-4">
-			<form name="loginForm">
-				<h2 class="md-display-1">Register</h2>
-				<md-input-container class="md-block">
-					<label>First Name</label>
-					<input type="text" ng-model="vm.admin.firstName">
-				</md-input-container>
-				<md-input-container class="md-block">
-					<label>Last Name</label>
-					<input type="text" ng-model="vm.admin.lastName">
-				</md-input-container>
-				<md-input-container class="md-block">
-					<label>Email</label>
-					<input type="text" ng-model="vm.admin.email">
-				</md-input-container>
-				<md-input-container class="md-block">
-					<label>Password</label>
-					<input type="password" ng-model="vm.admin.password">
-				</md-input-container>
-				<md-button class="md-raised md-primary"
-						   ng-click="vm.submit()">Register!
-				</md-button>
-			</form>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					Register
+				</div>
+				<div class="panel-body">
+					<form>
+						<div class="form-group">
+							<input type="text" ng-model="vm.admin.firstName" class="form-control" placeholder="First Name">
+						</div>
+						<div class="form-group">
+							<input type="text" vm-model="vm.admin.lastName" class="form-control" placeholder="Last Name">
+						</div>
+						<div class="form-group">
+							<input type="email" vm-model="vm.admin.email" class="form-control" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<input type="password" vm-model="vm.admin.password" class="form-control" placeholder="Password">
+						</div>
+						<button type="submit" class="btn btn-default" ng-click="vm.submit()">Register!</button>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

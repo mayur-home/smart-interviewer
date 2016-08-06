@@ -10,7 +10,8 @@ module.exports = {
 	getUserTests: getUserTests,
 	recordAnswer: recordAnswer,
 	markCompleted: markCompleted,
-	getReport: getReport
+	getReport: getReport,
+	checkStatus: checkStatus
 };
 
 //////////////////////////
@@ -63,6 +64,7 @@ function recordAnswer(req, res) {
 			}
 			test.report.push({
 				questionId: req.body.questionId,
+				questionWeightage: question.weightage,
 				isCorrect: _.find(question.answer, {id: parseInt(req.body.answerId)}).isCorrect
 			});
 			test.save();
@@ -70,6 +72,35 @@ function recordAnswer(req, res) {
 				success: true
 			});
 		});
+	});
+}
+
+function checkStatus(req, res) {
+	var requiredTrueAnswers = req.query.requiredCorrect;
+	var weightage = req.query.weightage;
+
+	Usertest.findOne({_id: req.params.id}, function(err, test) {
+		if (err) {
+			res.json(500, err);
+		}
+
+		console.log(test.report);
+		console.log(_.filter(test.report, { 'isCorrect': true, 'questionWeightage': weightage}));
+		console.log(_.filter(test.report, function(o){ return o.isCorrect && o.questionWeightage == weightage}));
+
+		var trueAnswers = _.filter(test.report, function(o){ return o.isCorrect && o.questionWeightage == weightage}).length;
+		console.log(trueAnswers);
+		console.log(requiredTrueAnswers);
+
+		if (trueAnswers >= requiredTrueAnswers) {
+			res.json({
+				goAhead: true
+			});
+		} else {
+			res.json({
+				goAhead: false
+			});
+		}
 	});
 }
 

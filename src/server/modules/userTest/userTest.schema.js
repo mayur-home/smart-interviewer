@@ -11,7 +11,7 @@ var usertestSchema = new Schema({
 	answers: [],
 	isCompleted: Boolean,
 	report: Array,
-	tags: Array
+	primaryTags: Array
 });
 
 var Usertest = mongoose.model('Usertest', usertestSchema);

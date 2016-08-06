@@ -6,7 +6,7 @@
 		.controller('AdminRegistrationController', AdminRegistrationController);
 
 	/* @ngInject */
-	function AdminRegistrationController($http, logger) {
+	function AdminRegistrationController($http, $state, logger) {
 		var vm = this;
 		vm.submit = submit;
 
@@ -25,6 +25,7 @@
 
 			function profileCreateSuccessful(user) {
 				console.log(user);
+				$state.go('adminLogin');
 			}
 
 			function profileCreateFailure(err) {

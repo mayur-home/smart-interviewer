@@ -5,6 +5,9 @@
 				<i class="fa fa-lock" aria-hidden="true"></i> Log In
 			</div>
 			<div class="panel-body">
+				<div class="alert alert-danger" ng-if="vm.errors.password || vm.errors.email" role="alert">
+					{{vm.errors.password.type || vm.errors.email.type}}
+				</div>
 				<form name="loginForm" ng-submit="vm.login()">
 					<div class="form-group"
 						 ng-class="{ 'has-error': loginForm.email.$touched && loginForm.email.$invalid }">
@@ -29,6 +32,7 @@
 							type="submit" ng-disabled="loginForm.$invalid">
 						Log In
 					</button>
+					<button type="submit" class="btn btn-default" ng-click="vm.register()">Register!</button>
 				</form>
 			</div>
 		</div>

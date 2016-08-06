@@ -24,7 +24,7 @@
 				})
 				.catch(function() {
 					session.remove('user');
-					$state.go('adminLogin');
+					// $state.go('adminLogin');
 				});
 		}
 

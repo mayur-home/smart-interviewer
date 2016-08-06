@@ -9,4 +9,5 @@ module.exports = function(router) {
 	router.post('/userTest/recordAnswer', userTest.recordAnswer);
 	router.post('/userTest/markCompleted', userTest.markCompleted);
 	router.get('/userTest/:id/report', userTest.getReport);
+	router.get('/userTest/:id/checkStatus', userTest.checkStatus);
 };

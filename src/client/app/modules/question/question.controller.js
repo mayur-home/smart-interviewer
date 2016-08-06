@@ -16,15 +16,22 @@
 		vm.answers = question.answer;
 		vm.snippet = question.snippet;
 		vm.id = question._id;
+		var userTestId = testService.getUserTestId();
+
+		var isSmartTest = testService.getType() === 'smart';
 
 		function next() {
 			recordAnswer()
 				.then(function() {
-					var nextQuestion = testService.getNextQuestion().value;
-					if (nextQuestion) {
-						$state.go('question', {testId: $stateParams.testId, id: nextQuestion});
+					if (isSmartTest) {
+						evaluateNextQuestion();
 					} else {
-						$state.go('testComplete', {testId: $stateParams.testId});
+						var nextQuestion = testService.getNextQuestion().value;
+						if (nextQuestion) {
+							$state.go('question', {testId: $stateParams.testId, id: nextQuestion});
+						} else {
+							$state.go('testComplete', {testId: $stateParams.testId});
+						}
 					}
 				});
 		}
@@ -34,6 +41,26 @@
 				questionId: vm.id,
 				answerId: vm.answerId
 			});
+		}
+
+		function evaluateNextQuestion() {
+			testService.getNextSmartQuestion()
+				.then(nextQuestionSuccess)
+				.catch(nextQuestionFailure);
+
+			function nextQuestionSuccess(response) {
+				var nextQuestion = response.id;
+				$state.go('question', {testId: userTestId, id: nextQuestion});
+			}
+
+			function nextQuestionFailure(err) {
+				logger.error('Error loading next question', err);
+				if (err && err.noMoreWeightage) {
+					$state.go('testComplete');
+					return;
+				}
+				evaluateNextQuestion();
+			}
 		}
 	}
 

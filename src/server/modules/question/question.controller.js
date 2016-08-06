@@ -1,6 +1,7 @@
 /* jshint -W106,-W033 */
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
 var Question = require('./question.schema');
+var Usertest = require('../userTest/userTest.schema');
 var _ = require('lodash');
 var fs = require('fs');
 var mongoXlsx = require('mongo-xlsx');
@@ -9,6 +10,7 @@ module.exports = {
 	create: create,
 	getAll: getAll,
 	get: get,
+	getNext: getNext,
 	getResult: getResult,
 	getSerchResult: getSerchResult,
 	postFile: postFile
@@ -41,6 +43,42 @@ function get(req, res) {
 		}
 		result.answer = _.map(result.answer, modifyAnswer);
 		res.json(result);
+	});
+}
+
+function getNext(req, res) {
+	var weightage = req.query.weightage;
+	var primaryTags = req.query.primaryTags ? (req.query.primaryTags).split(',') : [];
+	var userTestId = req.query.userTestId;
+
+	Usertest.findOne({_id: userTestId}, function(err, test) {
+		if (err) {
+			res.json(500, err);
+		}
+
+		var report = test.report;
+		var questions = _.map(report, function(item) {
+			return item.questionId;
+		});
+
+		Question.find({
+			_id: { $nin: questions },
+			tags: { $in: primaryTags},
+			weightage: weightage
+		}, function(err, questions) {
+			if (!questions.length) {
+				res.json({
+					errors: [{
+						reasonCode: 'NO_NEXT_QUESTION_WITH_TAG_WEIGHTAGE',
+						message: 'Do not have next message'
+					}]
+				});
+				return;
+			}
+			var randomQuestion = _.sample(questions);
+			randomQuestion.answer = _.map(randomQuestion.answer, modifyAnswer);
+			res.json(randomQuestion);
+		});
 	});
 }
 

@@ -44,7 +44,7 @@
 			};
 
 			if (vm.candidate.testType === 'smart') {
-				request.tags = _.map(vm.candidate.smartTags, function(tag) {
+				request.primaryTags = _.map(vm.candidate.primarySmartTags, function(tag) {
 					return tag.text;
 				});
 			}
@@ -55,7 +55,6 @@
 
 			function createTestSuccess(test) {
 				var data = test.data;
-				console.log(data);
 				$http.post('/api/user/test', {
 						userId: vm.user._id,
 						testId: data._id
