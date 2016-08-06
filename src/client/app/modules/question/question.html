@@ -3,9 +3,16 @@
 	<snippet ng-if="vm.snippet">{{vm.snippet}}</snippet>
 	<div class="question-answers">
 		<p><strong>Answer:</strong></p>
-		<div class="radio" ng-repeat="answer in vm.answers">
+		<div ng-if="vm.isRadioSelect" class="radio" ng-repeat="answer in vm.answers">
 			<label>
-				<input type="radio" ng-model="vm.answerId" value="{{answer.id}}" name="answer-options"> {{answer.answer}}
+				<input type="radio" ng-model="vm.answerId" value="{{answer.id}}" name="answer-options">
+				{{answer.answer}}
+			</label>
+		</div>
+		<div ng-if="vm.isMultiSelect" class="checkbox" ng-repeat="answer in vm.answers">
+			<label>
+				<input type="checkbox" value="{{answer.id}}" name="answer-options">
+				{{answer.answer}}
 			</label>
 		</div>
 	</div>

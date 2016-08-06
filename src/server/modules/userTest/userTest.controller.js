@@ -62,10 +62,25 @@ function recordAnswer(req, res) {
 			if (err) {
 				res.json(500, err);
 			}
+
+			var isCorrect;
+
+			if (_.isArray(req.body.answerId)) {
+				isCorrect = true;
+				_.some(req.body.answerId, function(answerId) {
+					if (!_.find(question.answer, {id: parseInt(answerId)}).isCorrect) {
+						isCorrect = false;
+						return true;
+					}
+				});
+			} else {
+				isCorrect = _.find(question.answer, {id: parseInt(req.body.answerId)}).isCorrect;
+			}
+
 			test.report.push({
 				questionId: req.body.questionId,
 				questionWeightage: question.weightage,
-				isCorrect: _.find(question.answer, {id: parseInt(req.body.answerId)}).isCorrect
+				isCorrect: isCorrect
 			});
 			test.save();
 			res.json({
@@ -84,13 +99,7 @@ function checkStatus(req, res) {
 			res.json(500, err);
 		}
 
-		console.log(test.report);
-		console.log(_.filter(test.report, { 'isCorrect': true, 'questionWeightage': weightage}));
-		console.log(_.filter(test.report, function(o){ return o.isCorrect && o.questionWeightage == weightage}));
-
 		var trueAnswers = _.filter(test.report, function(o){ return o.isCorrect && o.questionWeightage == weightage}).length;
-		console.log(trueAnswers);
-		console.log(requiredTrueAnswers);
 
 		if (trueAnswers >= requiredTrueAnswers) {
 			res.json({

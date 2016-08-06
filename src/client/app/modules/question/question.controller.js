@@ -6,18 +6,22 @@
 		.controller('QuestionController', QuestionController);
 
 	/* @ngInject */
-	function QuestionController(testService, question, $state, $stateParams, $scope, $http, logger) {
+	function QuestionController(testService, question, $state, $stateParams, $element, $scope, $http, logger) {
 		var vm = this;
 		vm.title = 'QuestionController';
 		vm.next = next;
 
 		///////////////
+
 		vm.question = question.question;
 		vm.answers = question.answer;
 		vm.snippet = question.snippet;
 		vm.id = question._id;
-		var userTestId = testService.getUserTestId();
+		vm.isMultiSelect = question.type === 'MSQ';
+		vm.isRadioSelect = question.type === 'SSQ';
+		vm.isDescriptiveQuestion = question.type === 'DQ';
 
+		var userTestId = testService.getUserTestId();
 		var isSmartTest = testService.getType() === 'smart';
 
 		function next() {
@@ -37,6 +41,11 @@
 		}
 
 		function recordAnswer() {
+			if (vm.isMultiSelect) {
+				vm.answerId = _.map($element.find('[name="answer-options"]:checked'), function(val) {
+					return val.value;
+				});
+			}
 			return testService.recordAnswer({
 				questionId: vm.id,
 				answerId: vm.answerId
