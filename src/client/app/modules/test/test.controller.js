@@ -11,6 +11,7 @@
 		var vm = this;
 		vm.startTest = startTest;
 		vm.firstName = test.firstName;
+		vm.isTestCompleted = test.isCompleted;
 
 		testService.setUserTestId(test._id);
 		testService.setTestType(test.type);
@@ -19,7 +20,7 @@
 
 		// Get the question list and store it in cache(testService) in
 		// case of FIXED test
-		if (test.type !== 'smart') {
+		if (!test.isCompleted && test.type !== 'smart') {
 			$http.get('/api/test/' + test.testId)
 				.then(testSuccess)
 				.catch(testFailure);

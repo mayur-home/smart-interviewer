@@ -1,9 +1,14 @@
 <div class="container">
 	<h2>Welcome {{vm.firstName}},</h2>
-	<h5>Integer non enim sed massa tristique consequat imperdiet eu diam. Sed ante felis, dignissim sed efficitur ut,
-		laoreet a risus. Proin tempus nunc nibh, sed gravida est blandit nec. Donec sed sem a eros interdum
-		pellentesque. Pellentesque convallis accumsan auctor. Maecenas at nisl condimentum, pharetra quam sit amet,
-		cursus magna. Curabitur aliquet id leo vel vestibulum.</h5>
-	<button type="button" ng-click="vm.startTest()" class="btn-primary">Start Test</button>
+	<div class="alert alert-info" ng-if="vm.isTestCompleted" role="alert">
+		This test is already completed. Please wait till you hear back from us.
+	</div>
+	<div ng-if="!vm.isTestCompleted">
+		<h5>Integer non enim sed massa tristique consequat imperdiet eu diam. Sed ante felis, dignissim sed efficitur ut,
+			laoreet a risus. Proin tempus nunc nibh, sed gravida est blandit nec. Donec sed sem a eros interdum
+			pellentesque. Pellentesque convallis accumsan auctor. Maecenas at nisl condimentum, pharetra quam sit amet,
+			cursus magna. Curabitur aliquet id leo vel vestibulum.</h5>
+		<button type="button" ng-click="vm.startTest()" class="btn-primary">Start Test</button>
+	</div>
 </div>
 
