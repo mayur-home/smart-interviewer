@@ -46,10 +46,16 @@
 					return val.value;
 				});
 			}
-			return testService.recordAnswer({
+
+			var answer = {
 				questionId: vm.id,
-				answerId: vm.answerId
-			});
+				answerId: vm.answerId,
+			};
+
+			if (vm.isDescriptiveQuestion)
+				answer.descriptiveAnswer = vm.descriptiveAnswer;
+
+			return testService.recordAnswer(answer);
 		}
 
 		function evaluateNextQuestion() {

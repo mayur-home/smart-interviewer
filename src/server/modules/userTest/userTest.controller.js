@@ -11,7 +11,8 @@ module.exports = {
 	recordAnswer: recordAnswer,
 	markCompleted: markCompleted,
 	getReport: getReport,
-	checkStatus: checkStatus
+	checkStatus: checkStatus,
+	setQuestionStatus: setQuestionStatus
 };
 
 //////////////////////////
@@ -64,28 +65,53 @@ function recordAnswer(req, res) {
 			}
 
 			var isCorrect;
-
-			if (_.isArray(req.body.answerId)) {
-				isCorrect = true;
-				_.some(req.body.answerId, function(answerId) {
-					if (!_.find(question.answer, {id: parseInt(answerId)}).isCorrect) {
-						isCorrect = false;
-						return true;
-					}
-				});
-			} else {
-				isCorrect = _.find(question.answer, {id: parseInt(req.body.answerId)}).isCorrect;
+			var report = {
+				questionId: req.body.questionId,
+				questionWeightage: question.weightage
 			}
 
-			test.report.push({
-				questionId: req.body.questionId,
-				questionWeightage: question.weightage,
-				isCorrect: isCorrect
-			});
+			if (question.type === 'DQ') {
+				report.descriptiveAnswer = req.body.descriptiveAnswer;
+			} else {
+				if (_.isArray(req.body.answerId)) {
+					isCorrect = true;
+					_.some(req.body.answerId, function(answerId) {
+						if (!_.find(question.answer, {id: parseInt(answerId)}).isCorrect) {
+							isCorrect = false;
+							return true;
+						}
+					});
+				} else {
+					isCorrect = _.find(question.answer, {id: parseInt(req.body.answerId)}).isCorrect;
+				}
+				report.isCorrect = isCorrect;
+			}
+
+			test.report.push(report);
 			test.save();
 			res.json({
 				success: true
 			});
+		});
+	});
+}
+
+function setQuestionStatus(req, res) {
+	Usertest.findOne({_id: req.body.id}, function(err, test) {
+		if (err) {
+			res.json(500, err);
+		}
+		_.some(test.report, function(entry, index) {
+			if (entry.questionId === req.body.questionId) {
+				entry.isCorrect = req.body.status;
+				test.report.set(index, entry);
+				return true;
+			}
+		});
+
+		test.save();
+		res.json({
+			status: req.body.status
 		});
 	});
 }

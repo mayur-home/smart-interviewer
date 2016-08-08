@@ -136,11 +136,9 @@
 		}
 
 		function recordAnswer(answer) {
-			return $http.post('/api/userTest/recordAnswer', {
-				id: userTestId,
-				questionId: answer.questionId,
-				answerId: answer.answerId
-			});
+			answer.id = userTestId;
+
+			return $http.post('/api/userTest/recordAnswer', answer);
 		}
 
 		function getNextSmartQuestion() {
