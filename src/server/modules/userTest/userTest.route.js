@@ -11,4 +11,5 @@ module.exports = function(router) {
 	router.post('/userTest/setQuestionStatus', userTest.setQuestionStatus);
 	router.get('/userTest/:id/report', userTest.getReport);
 	router.get('/userTest/:id/checkStatus', userTest.checkStatus);
+	router.delete('/userTest/:id/delete', userTest.deleteTest);
 };

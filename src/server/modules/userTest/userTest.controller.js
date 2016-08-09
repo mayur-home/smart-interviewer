@@ -12,7 +12,8 @@ module.exports = {
 	markCompleted: markCompleted,
 	getReport: getReport,
 	checkStatus: checkStatus,
-	setQuestionStatus: setQuestionStatus
+	setQuestionStatus: setQuestionStatus,
+	deleteTest: deleteTest
 };
 
 //////////////////////////
@@ -180,4 +181,13 @@ function generateReport(test) {
 	});
 
 	return defer.promise;
+}
+
+function deleteTest(req, res) {
+	Usertest.findOneAndRemove({_id: req.params.id}, function(err, test) {
+		if (err) {
+			res.json(500, err);
+		}
+		res.json(test);
+	});
 }

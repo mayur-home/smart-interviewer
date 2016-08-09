@@ -13,6 +13,7 @@
 		vm.addTest = addTest;
 		vm.createTestForCandidate = createTestForCandidate;
 		vm.showTestReport = showTestReport;
+		vm.deleteTest = deleteTest;
 
 		$http.get('/api/test')
 			.then(function(data) {
@@ -31,6 +32,15 @@
 				testName: vm.test.name,
 				userId: vm.user._id
 			});
+		}
+
+		function deleteTest(testId) {
+			$http.delete('api/userTest/' + testId + '/delete')
+				.then(function() {
+					_.remove(vm.userTests, function(n) {
+						return n._id === testId;
+					});
+				})
 		}
 
 		function createTestForCandidate() {
