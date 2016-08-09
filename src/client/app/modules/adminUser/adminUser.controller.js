@@ -70,6 +70,7 @@
 						testId: data._id
 					})
 					.then(function() {
+						vm.userTests.unshift(data);
 						logger.info('User test created successfully');
 					});
 			}
