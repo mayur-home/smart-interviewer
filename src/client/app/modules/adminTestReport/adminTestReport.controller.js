@@ -21,6 +21,7 @@
 
 		function generatePieChart() {
 			var result = _.countBy(testData, 'isCorrect');
+			console.log(result);
 			$('#test-pie-chart-container').highcharts({
 				chart: {
 					plotBackgroundColor: null,
@@ -52,10 +53,10 @@
 					colorByPoint: true,
 					data: [{
 						name: 'Correct',
-						y: result.true
+						y: result.true ? result.true : 0
 					}, {
 						name: 'Wrong',
-						y: result.false
+						y: result.false ? result.false : 0
 					}]
 				}]
 			});
