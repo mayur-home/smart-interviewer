@@ -53,10 +53,10 @@
 					colorByPoint: true,
 					data: [{
 						name: 'Correct',
-						y: result.true ? result.true : 0
+						y: result.true || 0
 					}, {
 						name: 'Wrong',
-						y: result.false ? result.false : 0
+						y: result.false || 0
 					}]
 				}]
 			});
