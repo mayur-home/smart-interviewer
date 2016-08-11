@@ -1,5 +1,11 @@
 <div class="container">
-	<div id="test-pie-chart-container"></div>
+	<si-pie-chart
+		id="test-result-chart-container"
+		title-text="Summary Test Report"
+		series="vm.pieChartSeries"
+		tooltip-point-format="{series.name}: <b>{point.percentage:.1f}%</b>"
+		plot-data-labels-format="<b>{point.name}</b>: {point.percentage:.1f}%">
+	</si-pie-chart>
 	<h3>Test Result Detailed Report</h3>
 	<table class="table table-bordered table-responsive">
 		<thead>

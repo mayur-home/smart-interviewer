@@ -15,51 +15,24 @@
 		//////////////
 
 		function activate() {
-			generatePieChart();
+			generateChartData();
 			logger.info('Activated Test Report Controller Activated');
 		}
 
-		function generatePieChart() {
+		function generateChartData() {
 			var result = _.countBy(testData, 'isCorrect');
-			console.log(result);
-			$('#test-pie-chart-container').highcharts({
-				chart: {
-					plotBackgroundColor: null,
-					plotBorderWidth: null,
-					plotShadow: false,
-					type: 'pie'
-				},
-				title: {
-					text: 'Summary Test Result'
-				},
-				tooltip: {
-					pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-				},
-				plotOptions: {
-					pie: {
-						allowPointSelect: true,
-						cursor: 'pointer',
-						dataLabels: {
-							enabled: true,
-							format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-							style: {
-								color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-							}
-						}
-					}
-				},
-				series: [{
-					name: 'Test Results',
-					colorByPoint: true,
-					data: [{
-						name: 'Correct',
-						y: result.true || 0
-					}, {
-						name: 'Wrong',
-						y: result.false || 0
-					}]
+			// this object will be passed to chart directive.
+			vm.pieChartSeries = [{
+				name: 'Test Results',
+				colorByPoint: true,
+				data: [{
+					name: 'Correct',
+					y: result.true || 0
+				}, {
+					name: 'Wrong',
+					y: result.false || 0
 				}]
-			});
+			}];
 		}
 
 		function markStatus(status, questionId, index) {
@@ -72,7 +45,7 @@
 			$http.post('api/userTest/setQuestionStatus', params)
 				.then(function(response) {
 					vm.testData[index].isCorrect = response.data.status;
-					generatePieChart();
+					generateChartData();
 				});
 		}
 	}
