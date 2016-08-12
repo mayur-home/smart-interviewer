@@ -1,6 +1,6 @@
 {
   "directory": "bower_components",
 	"scripts": {
-    "postinstall": "node ./node_modules/bower-requirejs/bin/bower-requirejs.js -c scripts/config.js"
+    "postinstall": "npm run bower-requirejs"
 	}
 }
