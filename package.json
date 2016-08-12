@@ -92,5 +92,8 @@
     "sinon-chai": "^2.6.0",
     "wiredep": "^2.2.2",
     "yargs": "^3.15.0"
+  },
+  "engines": {
+    "node": "4.4.0"
   }
 }
