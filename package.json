@@ -6,8 +6,7 @@
     "init": "npm install",
     "install": "bower install",
     "start": "node src/server/app.js",
-    "test": "gulp test",
-    "bower-requirejs": "bower-requirejs -c scripts/config.js"
+    "test": "gulp test"
   },
   "dependencies": {
     "bower": "1.7.9",
