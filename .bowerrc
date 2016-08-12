@@ -1,6 +1,6 @@
 {
   "directory": "bower_components",
 	"scripts": {
-    "postinstall": "npm run bower-requirejs"
+		"postinstall": "gulp wiredep"
 	}
 }

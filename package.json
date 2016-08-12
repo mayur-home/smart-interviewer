@@ -6,8 +6,7 @@
     "init": "npm install",
     "install": "bower install",
     "start": "node src/server/app.js",
-    "test": "gulp test",
-    "bower-requirejs": "bower-requirejs -c scripts/config.js"
+    "test": "gulp test"
   },
   "dependencies": {
     "bower": "1.7.9",
@@ -27,8 +26,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "q": "^1.4.1",
-    "serve-favicon": "^2.0.1",
-    "bower-requirejs": "^0.11.0"
+    "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
     "browser-sync": "^2.7.13",
