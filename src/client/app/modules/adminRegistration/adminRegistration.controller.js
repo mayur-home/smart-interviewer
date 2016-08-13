@@ -18,7 +18,7 @@
 			logger.info('Activated Signup controller');
 		}
 
-		$scope.watch('vm.admin', function(oval, nval) {
+		$scope.$watch('vm.admin', function(oval, nval) {
 			console.log(oval);
 			console.log(nval);
 		});
