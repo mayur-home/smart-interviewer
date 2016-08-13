@@ -1,3 +1,1 @@
-"scripts": {
-  "start": "gulp serve-build"
-}
+web: gulp serve-build
