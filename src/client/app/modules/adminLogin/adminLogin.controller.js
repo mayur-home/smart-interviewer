@@ -6,7 +6,7 @@
 		.controller('AdminLoginController', AdminLoginController);
 
 	/* @ngInject */
-	function AdminLoginController(session, $state, logger, $scope) {
+	function AdminLoginController(session, $state, logger) {
 		var vm = this;
 		vm.login = login;
 		vm.register = register;
@@ -18,11 +18,6 @@
 		function activate() {
 			logger.info('Activated Admin Login controller');
 		}
-
-		$scope.$watch('vm.admin', function(oval, nval) {
-			console.log(oval);
-			console.log(nval);
-		});
 
 		function login() {
 			session.signin({

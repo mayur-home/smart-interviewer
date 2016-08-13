@@ -6,7 +6,7 @@
 		.controller('AdminRegistrationController', AdminRegistrationController);
 
 	/* @ngInject */
-	function AdminRegistrationController($http, $state, logger, $scope) {
+	function AdminRegistrationController($http, $state, logger) {
 		var vm = this;
 		vm.submit = submit;
 
@@ -17,11 +17,6 @@
 		function activate() {
 			logger.info('Activated Signup controller');
 		}
-
-		$scope.$watch('vm.admin', function(oval, nval) {
-			console.log(oval);
-			console.log(nval);
-		});
 
 		function submit() {
 			$http.post('/api/user', vm.admin)
