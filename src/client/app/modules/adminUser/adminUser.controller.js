@@ -45,6 +45,7 @@
 
 		function createTestForCandidate() {
 			var request = {
+				name: vm.testName,
 				testId: vm.candidate.test,
 				email: vm.candidate.email,
 				firstName: vm.candidate.firstName,

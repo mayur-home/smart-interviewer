@@ -8,7 +8,8 @@
 	/* @ngInject */
 	function AdminTestReportController(testData, $http, $stateParams, logger) {
 		var vm = this;
-		vm.testData = testData;
+		vm.testInfo = testData.testInfo;
+		vm.report = testData.report;
 		vm.markStatus = markStatus;
 		activate();
 
@@ -20,7 +21,7 @@
 		}
 
 		function generateChartData() {
-			var result = _.countBy(testData, 'isCorrect');
+			var result = _.countBy(testData.report, 'isCorrect');
 			// this object will be passed to chart directive.
 			vm.pieChartSeries = [{
 				name: 'Test Results',
@@ -44,7 +45,7 @@
 
 			$http.post('api/userTest/setQuestionStatus', params)
 				.then(function(response) {
-					vm.testData[index].isCorrect = response.data.status;
+					vm.report[index].isCorrect = response.data.status;
 					generateChartData();
 				});
 		}

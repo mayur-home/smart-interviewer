@@ -159,7 +159,12 @@ function getReport(req, res) {
 
 		generateReport(test)
 			.then(function(report) {
-				res.json(report);
+				res.json({
+					testInfo: {
+						name: test.name
+					},
+					report: report
+				});
 			});
 	});
 }

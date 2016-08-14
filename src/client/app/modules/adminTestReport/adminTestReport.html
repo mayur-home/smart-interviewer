@@ -1,4 +1,6 @@
 <div class="container">
+	<h2>{{vm.testInfo.name}}</h2>
+	<hr>
 	<si-pie-chart
 		id="test-result-chart-container"
 		title-text="Summary Test Report"
@@ -15,7 +17,7 @@
 		<th>Is Correct?</th>
 		</thead>
 		<tbody>
-		<tr ng-repeat="answer in vm.testData" ng-class="{'success' : answer.isCorrect}">
+		<tr ng-repeat="answer in vm.report" ng-class="{'success' : answer.isCorrect}">
 			<td>
 				<p>{{answer.question}}</p>
 				<div class="well well-sm margin-bottom0" ng-if="answer.descriptiveAnswer">
