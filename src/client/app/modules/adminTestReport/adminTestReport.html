@@ -1,6 +1,11 @@
 <div class="container">
 	<h2>{{vm.testInfo.name}}</h2>
 	<hr>
+	<div class="alert alert-info" role="alert">
+		<p><strong>Candidate Name:</strong> {{vm.testInfo.firstName}} {{vm.testInfo.lastName}}</p>
+		<p><strong>Test start time:</strong> {{vm.testInfo.formatted_completionDate}}</p>
+		<p><strong>Test completion time:</strong> {{vm.testInfo.formatted_completionDate}}</p>
+	</div>
 	<si-pie-chart
 		id="test-result-chart-container"
 		title-text="Summary Test Report"

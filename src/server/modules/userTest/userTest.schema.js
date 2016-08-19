@@ -11,9 +11,17 @@ var usertestSchema = new Schema({
 	lastName: String,
 	answers: [],
 	isCompleted: Boolean,
+	completionDate: Date,
 	report: Array,
 	primaryTags: Array
 });
+
+usertestSchema
+	.virtual('formatted_completionDate')
+	.get(function() {
+		var date = new Date(this.completionDate);
+		return date.toUTCString();
+	});
 
 var Usertest = mongoose.model('Usertest', usertestSchema);
 

@@ -146,6 +146,7 @@ function markCompleted(req, res) {
 			res.json(500, err);
 		}
 		test.isCompleted = true;
+		test.completionDate = new Date();
 		test.save();
 		res.json(test);
 	});
@@ -161,7 +162,10 @@ function getReport(req, res) {
 			.then(function(report) {
 				res.json({
 					testInfo: {
-						name: test.name
+						name: test.name,
+						formatted_completionDate: test.formatted_completionDate,
+						firstName: test.firstName,
+						lastName: test.lastName
 					},
 					report: report
 				});
