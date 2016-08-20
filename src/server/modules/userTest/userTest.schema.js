@@ -12,6 +12,7 @@ var usertestSchema = new Schema({
 	answers: [],
 	isCompleted: Boolean,
 	completionDate: Date,
+	startDate: Date,
 	report: Array,
 	primaryTags: Array
 });
@@ -20,6 +21,13 @@ usertestSchema
 	.virtual('formatted_completionDate')
 	.get(function() {
 		var date = new Date(this.completionDate);
+		return date.toUTCString();
+	});
+
+usertestSchema
+	.virtual('formatted_startDate')
+	.get(function() {
+		var date = new Date(this.startDate);
 		return date.toUTCString();
 	});
 

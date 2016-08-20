@@ -13,7 +13,8 @@ module.exports = {
 	getReport: getReport,
 	checkStatus: checkStatus,
 	setQuestionStatus: setQuestionStatus,
-	deleteTest: deleteTest
+	deleteTest: deleteTest,
+	markStart: markStart
 };
 
 //////////////////////////
@@ -117,6 +118,17 @@ function setQuestionStatus(req, res) {
 	});
 }
 
+function markStart(req, res) {
+	Usertest.findOne({_id: req.body.id}, function(err, test) {
+		if (err) {
+			res.json(500, err);
+		}
+		test.startDate = new Date();
+		test.save();
+		res.json(test);
+	});
+}
+
 function checkStatus(req, res) {
 	var requiredTrueAnswers = req.query.requiredCorrect;
 	var weightage = req.query.weightage;
@@ -164,6 +176,7 @@ function getReport(req, res) {
 					testInfo: {
 						name: test.name,
 						formatted_completionDate: test.formatted_completionDate,
+						formatted_startDate: test.formatted_startDate,
 						firstName: test.firstName,
 						lastName: test.lastName
 					},

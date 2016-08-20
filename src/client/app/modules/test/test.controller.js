@@ -38,15 +38,20 @@
 		///////////////////
 
 		function startTest() {
-			if (test.type === 'smart') {
-				testService.getNextSmartQuestion()
-					.then(function(response) {
-						var nextQuestion = response.id;
-						$state.go('question', {testId: test._id, id: nextQuestion});
-					});
-				return;
+			$http.post('/api/userTest/markStart', {id: testService.getUserTestId()})
+				.then(loadQuestion);
+
+			function loadQuestion() {
+				if (test.type === 'smart') {
+					testService.getNextSmartQuestion()
+						.then(function(response) {
+							var nextQuestion = response.id;
+							$state.go('question', {testId: test._id, id: nextQuestion});
+						});
+					return;
+				}
+				$state.go('question', {testId: testService.getId(), id: testService.getNextQuestion().value});
 			}
-			$state.go('question', {testId: testService.getId(), id: testService.getNextQuestion().value});
 		}
 	}
 })();

@@ -1,11 +1,16 @@
 <div class="container">
-	<h2>{{vm.testInfo.name}}</h2>
-	<hr>
-	<div class="alert alert-info" role="alert">
-		<p><strong>Candidate Name:</strong> {{vm.testInfo.firstName}} {{vm.testInfo.lastName}}</p>
-		<p><strong>Test start time:</strong> {{vm.testInfo.formatted_completionDate}}</p>
-		<p><strong>Test completion time:</strong> {{vm.testInfo.formatted_completionDate}}</p>
+	<div class="page-header">
+		<h1>{{vm.testInfo.name}}</h1>
 	</div>
+
+	<blockquote>
+		<p><strong>Candidate Name:</strong> {{vm.testInfo.firstName}} {{vm.testInfo.lastName}}</p>
+		<p><strong>Test start time:</strong> {{vm.testInfo.formatted_startDate}}</p>
+		<p><strong>Test completion time:</strong> {{vm.testInfo.formatted_completionDate}}</p>
+	</blockquote>
+
+	<hr>
+
 	<si-pie-chart
 		id="test-result-chart-container"
 		title-text="Summary Test Report"
@@ -13,6 +18,7 @@
 		tooltip-point-format="{series.name}: <b>{point.percentage:.1f}%</b>"
 		plot-data-labels-format="<b>{point.name}</b>: {point.percentage:.1f}%">
 	</si-pie-chart>
+
 	<h3>Test Result Detailed Report</h3>
 	<table class="table table-bordered table-responsive">
 		<thead>
