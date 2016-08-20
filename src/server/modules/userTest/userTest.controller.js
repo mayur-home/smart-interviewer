@@ -1,7 +1,9 @@
 var Usertest = require('./userTest.schema');
 var Question = require('../question/question.schema');
+var AuthTest = require('../authTest/authTest.schema');
 var _ = require('lodash');
 var Q = require('q');
+var randtoken = require('rand-token');
 
 module.exports = {
 	getAll: getAll,
@@ -24,7 +26,14 @@ function createTest(req, res) {
 		if (err) {
 			res.json(500, err);
 		}
-		res.json(test);
+		AuthTest.create({
+			userTestId: test._id,
+			token: randtoken.generate(16),
+			email: test.email
+		})
+			.then(function() {
+				res.json(test);
+			});
 	});
 }
 

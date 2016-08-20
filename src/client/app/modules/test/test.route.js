@@ -14,15 +14,15 @@
 				{
 					state: 'test',
 					config: {
-						url: '/test/:id',
+						url: '/test',
 						templateUrl: 'app/modules/test/test.html',
 						controller: 'testController',
 						controllerAs: 'vm',
 						title: 'Test',
 						resolve: {
 							/* @ngInject */
-							test: function($stateParams, $http, logger) {
-								return $http.get('/api/userTest/' + $stateParams.id)
+							test: function(testService, $http, logger) {
+								return $http.get('/api/userTest/' + testService.getUserTestId())
 									.then(getTestSuccess)
 									.catch(getTestFailure);
 

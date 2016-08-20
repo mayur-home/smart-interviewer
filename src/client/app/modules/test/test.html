@@ -1,5 +1,8 @@
 <div class="container">
-	<h2>Welcome {{vm.firstName}},</h2>
+	<div class="page-header">
+		<h1>Welcome {{vm.firstName}},</h1>
+	</div>
+
 	<div class="alert alert-info" ng-if="vm.isTestCompleted" role="alert">
 		This test is already completed. Please wait till you hear back from us.
 	</div>

@@ -7,7 +7,8 @@ var routes = [
 	'./modules/question/question.route',
 	'./modules/test/test.route',
 	'./modules/userTest/userTest.route',
-	'./modules/authentication/authentication.route'
+	'./modules/authentication/authentication.route',
+	'./modules/authTest/authTest.route'
 ];
 
 for (var index in routes) {

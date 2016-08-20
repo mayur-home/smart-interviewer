@@ -13,6 +13,7 @@
 			'admin.registration',
 			'admin.testReport',
 			'app.layout',
+			'verifyToken',
 			'test',
 			'question',
 			'testComplete',

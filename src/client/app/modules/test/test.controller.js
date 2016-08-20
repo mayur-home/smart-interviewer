@@ -6,14 +6,14 @@
 		.controller('testController', testController);
 
 	/* @ngInject */
-	function testController(test, testService, $stateParams, $state, $http, logger) {
+	function testController(test, testService, $state, $http, logger) {
 		// jshint validthis: true
 		var vm = this;
 		vm.startTest = startTest;
 		vm.firstName = test.firstName;
 		vm.isTestCompleted = test.isCompleted;
 
-		testService.setUserTestId(test._id);
+		// testService.setUserTestId(test._id);
 		testService.setTestType(test.type);
 		testService.setPrimaryTags(test.primaryTags ? (test.primaryTags).join(',') : '');
 		testService.resetQuestionCounter();
