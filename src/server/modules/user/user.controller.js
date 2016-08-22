@@ -1,6 +1,6 @@
 var User = require('./user.schema');
 var Usertest = require('../userTest/userTest.schema');
-var _ = require('lodash');
+var mailUtils = require('../../utils/mail.utils');
 
 module.exports = {
 	getAll: getAll,
@@ -27,6 +27,13 @@ function create(req, res) {
 		if (err) {
 			res.json(500, err);
 		}
+		// TODO - Need to convert this fixed text to template.
+		var mailBody = 'Hello ' + user.firstName + ', <br/><br/>';
+		mailBody += 'You have successfully registered with Smart Interviewer.!<br/>';
+		mailBody += 'Please use this email id and your password to login into system.<br/><br/>';
+		mailBody += 'Thanks & Regards,<br/>';
+		mailBody += 'Smart Interviewer Team<br/>';
+		mailUtils.sendMail('', user.email, 'Congratulations! Registered Successfully.', mailBody, true);
 		res.json(user);
 	});
 }

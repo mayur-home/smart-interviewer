@@ -1,6 +1,7 @@
 var Usertest = require('./userTest.schema');
 var Question = require('../question/question.schema');
 var AuthTest = require('../authTest/authTest.schema');
+var mailUtils = require('../../utils/mail.utils');
 var _ = require('lodash');
 var Q = require('q');
 var randtoken = require('rand-token');
@@ -31,7 +32,16 @@ function createTest(req, res) {
 			token: randtoken.generate(16),
 			email: test.email
 		})
-			.then(function() {
+			.then(function(response) {
+				// TODO - Need to convert this fixed text to template.
+				var mailBody = 'Hi ' + test.firstName + ',<br/><br/>';
+				mailBody += 'Please click on below link to start your test<br/>';
+				mailBody += 'Link: '+ req.headers.origin +'/verifyToken/' + response.token;
+				mailBody += '<br/> <br/>';
+				mailBody += 'Thanks & Regards,<br/>';
+				mailBody += 'Smart Interviewer Team';
+
+				mailUtils.sendMail('', response.email, 'Congratulations!! Selected for Interview.!', mailBody, true);
 				res.json(test);
 			});
 	});
