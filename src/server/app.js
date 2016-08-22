@@ -11,6 +11,9 @@ var port = process.env.PORT || 8001;
 var four0four = require('./utils/404')();
 var passport = require('passport');
 var mongoose = require('./config/mongo');
+var mailUtils = require('./utils/mail.utils');
+
+mailUtils.sendMail('test@gmail.com', 'mayur.mcc@gmail.com', 'Test', '<b>Test</b>', true);
 
 var environment = process.env.NODE_ENV;
 
