@@ -7,7 +7,8 @@ module.exports = {
 	create: create,
 	addTest: addTest,
 	getAllTests: getAllTests,
-	getTestReport: getTestReport
+	getTestReport: getTestReport,
+	activateUser: activateUser
 };
 
 //////////////////////////
@@ -23,6 +24,8 @@ function getAll(req, res) {
 
 function create(req, res) {
 	console.log('called profile create');
+	req.body.activateToken = randtoken.generate(16);
+
 	User.create(req.body, function(err, user) {
 		if (err) {
 			res.json(500, err);
@@ -30,11 +33,33 @@ function create(req, res) {
 		// TODO - Need to convert this fixed text to template.
 		var mailBody = 'Hello ' + user.firstName + ', <br/><br/>';
 		mailBody += 'You have successfully registered with Smart Interviewer.!<br/>';
-		mailBody += 'Please use this email id and your password to login into system.<br/><br/>';
+		mailBody += 'Please click on below link to activate your account<br/>';
+		mailBody += 'Link: ' + req.headers.origin + '/activateAccount/' + user.activateToken;
+		mailBody += '<br/> <br/>';
 		mailBody += 'Thanks & Regards,<br/>';
 		mailBody += 'Smart Interviewer Team<br/>';
 		mailUtils.sendMail('', user.email, 'Congratulations! Registered Successfully.', mailBody, true);
 		res.json(user);
+	});
+}
+
+function activateUser(req, res) {
+	User.findOne({activateToken: req.params.activateToken}, function(err, user) {
+		if (err) {
+			res.json(500, err);
+		}
+		if (!user) {
+			res.json(404, {
+				code: 'NOT_ACTIVATED',
+				message: 'Not a valid link'
+			});
+		} else {
+			user.isActive = true;
+			user.save();
+			res.json({
+				success: true
+			});
+		}
 	});
 }
 
