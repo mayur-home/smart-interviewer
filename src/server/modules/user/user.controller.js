@@ -34,7 +34,7 @@ function create(req, res) {
 		var mailBody = 'Hello ' + user.firstName + ', <br/><br/>';
 		mailBody += 'You have successfully registered with Smart Interviewer.!<br/>';
 		mailBody += 'Please click on below link to activate your account<br/>';
-		mailBody += 'Link: '+ req.headers.origin +'/activateAccount/' + user.activateToken;
+		mailBody += 'Link: ' + req.headers.origin + '/activateAccount/' + user.activateToken;
 		mailBody += '<br/> <br/>';
 		mailBody += 'Thanks & Regards,<br/>';
 		mailBody += 'Smart Interviewer Team<br/>';
