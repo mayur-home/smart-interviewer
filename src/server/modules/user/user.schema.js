@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var base64 = require('base-64');
+var randtoken = require('rand-token');
 
 var Schema = mongoose.Schema;
 var userSchema = new Schema({
@@ -9,6 +10,8 @@ var userSchema = new Schema({
 	lastName: String,
 	email: String,
 	hashedPassword: String,
+	isActive: Boolean,
+	activateToken: String,
 	tests: [{type: Schema.Types.ObjectId, ref: 'Usertest'}]
 });
 
