@@ -14,6 +14,7 @@
 			'admin.testReport',
 			'app.layout',
 			'verifyToken',
+			'activateUser',
 			'test',
 			'question',
 			'testComplete',
