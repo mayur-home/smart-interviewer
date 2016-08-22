@@ -1,6 +1,7 @@
 var User = require('./user.schema');
 var Usertest = require('../userTest/userTest.schema');
 var mailUtils = require('../../utils/mail.utils');
+var randtoken = require('rand-token');
 
 module.exports = {
 	getAll: getAll,
@@ -34,7 +35,7 @@ function create(req, res) {
 		var mailBody = 'Hello ' + user.firstName + ', <br/><br/>';
 		mailBody += 'You have successfully registered with Smart Interviewer.!<br/>';
 		mailBody += 'Please click on below link to activate your account<br/>';
-		mailBody += 'Link: ' + req.headers.origin + '/activateAccount/' + user.activateToken;
+		mailBody += 'Link: ' + req.headers.origin + '/activateUser/' + user.activateToken;
 		mailBody += '<br/> <br/>';
 		mailBody += 'Thanks & Regards,<br/>';
 		mailBody += 'Smart Interviewer Team<br/>';
@@ -44,7 +45,7 @@ function create(req, res) {
 }
 
 function activateUser(req, res) {
-	User.findOne({activateToken: req.params.activateToken}, function(err, user) {
+	User.findOne({activateToken: req.body.token}, function(err, user) {
 		if (err) {
 			res.json(500, err);
 		}
