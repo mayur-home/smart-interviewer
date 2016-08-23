@@ -34,8 +34,7 @@
 
 			function loginFailure(err) {
 				// vm.loginError
-				vm.errors = err.errors;
-				console.log(vm.errors);
+				vm.errorMessage = err.message;
 				logger.info('Login failed');
 			}
 		}

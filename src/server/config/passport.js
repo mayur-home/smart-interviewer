@@ -26,16 +26,14 @@ passport.use('login', new LocalStrategy({
 			}
 			if (!user) {
 				return done(null, false, {
-					'errors': {
-						'email': {type: 'Email is not registered.'}
-					}
+					code: 'UNREGISTERED_EMAIL',
+					message: 'Email is not registered.'
 				});
 			}
 			if (!user.authenticate(password)) {
 				return done(null, false, {
-					'errors': {
-						'password': {type: 'Password is incorrect.'}
-					}
+					code: 'INCORRECT_PASSWORD',
+					message: 'Password is incorrect.'
 				});
 			}
 			return done(null, user);
