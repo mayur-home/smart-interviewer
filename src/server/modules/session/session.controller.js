@@ -2,8 +2,7 @@
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
 'use strict';
 
-var mongoose = require('mongoose'),
-	passport = require('passport');
+var passport = require('passport');
 
 /**
  * Session
@@ -36,11 +35,19 @@ exports.login = function(req, res, next) {
 		if (error) {
 			return res.json(400, error);
 		}
-		req.logIn(user, function(err) {
-			if (err) {
-				return res.send(err);
-			}
-			res.json(req.user.user_info);
-		});
+
+		if(!user.isActive) {
+			res.json(400, {
+				code: 'INACTIVE_PROFILE',
+				message: 'User profile is not activated'
+			});
+		} else {
+			req.logIn(user, function(err) {
+				if (err) {
+					return res.send(err);
+				}
+				res.json(req.user.user_info);
+			});
+		}
 	})(req, res, next);
 };
