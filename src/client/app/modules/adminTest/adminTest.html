@@ -2,30 +2,20 @@
 <hr>
 <div class="row">
 	<div class="col-sm-6">
-		<div class="added-question-list">
-			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="item in vm.questions">
-					<p>{{item.question}}</p>
-					<button type="button" class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(item._id)">Remove</button>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div class="col-sm-6">
 		<input type="text" class="form-control" name="search" ng-model="vm.search" placeholder="Search question">
-		<span id="helpBlock" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+		<span id="helpBlock" class="help-block">Type "Keyword", "Tag" or "Text" for search.</span>
 		<hr>
 
 		<div class="search-result">
 			<div class="alert alert-warning" role="alert" ng-if="vm.searchedQuestions.length < 1">
-				No serch result found
+				No search result found
 			</div>
 			<ul class="list-group">
 				<li class="list-group-item" ng-repeat="item in vm.searchedQuestions">
 					<p>{{item.question}}</p>
 					<p>
 						<small><b>Options:</b>
-						<span ng-repeat="ans in item.answer">
+							<span ng-repeat="ans in item.answer">
 							{{ans.answer}}
 							<i class="fa fa-check-square-o" ng-if="ans.isCorrect" aria-hidden="true"></i>
 							<i ng-if="!$last">,</i>
@@ -51,5 +41,15 @@
 				</li>
 			</ul>
 		</nav>
+	</div>
+	<div class="col-sm-6">
+		<div class="added-question-list">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="item in vm.questions">
+					<p>{{item.question}}</p>
+					<button type="button" class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(item._id)">Remove</button>
+				</li>
+			</ul>
+		</div>
 	</div>
 </div>
