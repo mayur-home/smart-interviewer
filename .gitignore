@@ -5,7 +5,6 @@ bower_components/
 report/
 build/
 uploads/
-template/
 
 # other
 .tmp
