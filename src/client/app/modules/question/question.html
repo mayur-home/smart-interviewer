@@ -5,7 +5,7 @@
 		</div>
 		<div class="panel-body">
 			<snippet ng-if="vm.snippet">{{vm.snippet}}</snippet>
-			<div class="question-answers margin-bottom20">
+			<div class="margin-bottom20">
 				<p><strong>Answer options:</strong></p>
 				<div ng-if="vm.isRadioSelect" class="radio" ng-repeat="answer in vm.answers">
 					<label>
@@ -23,7 +23,7 @@
 					<textarea class="form-control" ng-model="vm.descriptiveAnswer" rows="5"></textarea>
 				</div>
 			</div>
-			<div class="question-actions">
+			<div>
 				<button type="button" ng-click="vm.next()" class="pull-right btn btn-primary">
 					Save & Continue..
 				</button>
