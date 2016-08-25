@@ -17,6 +17,7 @@
 			'activateUser',
 			'test',
 			'question',
+			'resetPassword',
 			'testComplete',
 			'ngCkeditor',
 			'ngTagsInput'

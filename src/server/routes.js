@@ -8,7 +8,8 @@ var routes = [
 	'./modules/test/test.route',
 	'./modules/userTest/userTest.route',
 	'./modules/authentication/authentication.route',
-	'./modules/authTest/authTest.route'
+	'./modules/authTest/authTest.route',
+	'./modules/userOTP/userOTP.route'
 ];
 
 for (var index in routes) {
