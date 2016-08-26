@@ -10,4 +10,5 @@ module.exports = function(router) {
 	router.get('/user/:userId/tests', user.getAllTests);
 	router.get('/user/:id/test/:testId/report', auth.ensureAuthenticated, user.getTestReport);
 	router.post('/user/activate', user.activateUser);
+	router.post('/user/resetPassword', user.resetPassword);
 };
