@@ -1,27 +1,33 @@
-<div class="container md-whiteframe-5dp md-padding">
-	<p><strong>Question:</strong> {{vm.question}}</p>
-	<snippet ng-if="vm.snippet">{{vm.snippet}}</snippet>
-	<div class="question-answers margin-bottom20">
-		<p><strong>Answer:</strong></p>
-		<div ng-if="vm.isRadioSelect" class="radio" ng-repeat="answer in vm.answers">
-			<label>
-				<input type="radio" ng-model="vm.answerId" value="{{answer.id}}" name="answer-options">
-				{{answer.answer}}
-			</label>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<strong>{{vm.question}}</strong>
 		</div>
-		<div ng-if="vm.isMultiSelect" class="checkbox" ng-repeat="answer in vm.answers">
-			<label>
-				<input type="checkbox" value="{{answer.id}}" name="answer-options">
-				{{answer.answer}}
-			</label>
+		<div class="panel-body">
+			<snippet ng-if="vm.snippet">{{vm.snippet}}</snippet>
+			<div class="margin-bottom20">
+				<p><strong>Answer options:</strong></p>
+				<div ng-if="vm.isRadioSelect" class="radio" ng-repeat="answer in vm.answers">
+					<label>
+						<input type="radio" ng-model="vm.answerId" value="{{answer.id}}" name="answer-options">
+						{{answer.answer}}
+					</label>
+				</div>
+				<div ng-if="vm.isMultiSelect" class="checkbox" ng-repeat="answer in vm.answers">
+					<label>
+						<input type="checkbox" value="{{answer.id}}" name="answer-options">
+						{{answer.answer}}
+					</label>
+				</div>
+				<div ng-if="vm.isDescriptiveQuestion">
+					<textarea class="form-control" ng-model="vm.descriptiveAnswer" rows="5"></textarea>
+				</div>
+			</div>
+			<div>
+				<button type="button" ng-click="vm.next()" class="pull-right btn btn-primary">
+					Save & Continue..
+				</button>
+			</div>
 		</div>
-		<div ng-if="vm.isDescriptiveQuestion">
-			<textarea class="form-control" ng-model="vm.descriptiveAnswer" rows="5"></textarea>
-		</div>
-	</div>
-	<div class="question-actions">
-		<button type="button" ng-click="vm.next()" class="pull-right btn btn-primary">
-			Save & Continue..
-		</button>
 	</div>
 </div>
