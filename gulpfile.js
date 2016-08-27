@@ -249,9 +249,9 @@ gulp.task('optimize', ['inject'], function() {
 		.pipe(assets) // Gather all assets from the html with useref
 		// Get the css
 		// TODO - Need to fix cssFilter error.
-		.pipe(cssFilter)
-		.pipe($.minifyCss())
-		.pipe(cssFilter.restore())
+		// .pipe(cssFilter)
+		// .pipe($.minifyCss())
+		// .pipe(cssFilter.restore())
 		// Get the custom javascript
 		.pipe(jsAppFilter)
 		.pipe($.ngAnnotate({add: true}))
@@ -270,7 +270,6 @@ gulp.task('optimize', ['inject'], function() {
 		// Replace the file names in the html with rev numbers
 		.pipe($.revReplace())
 		.pipe(gulp.dest(config.build));
-		
 });
 
 /**
