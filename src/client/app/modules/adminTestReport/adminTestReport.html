@@ -11,14 +11,16 @@
 
 	<hr>
 
-	<si-pie-chart
-		id="test-result-chart-container"
-		title-text="Summary Test Report"
-		series="vm.pieChartSeries"
-		tooltip-point-format="{series.name}: <b>{point.percentage:.1f}%</b>"
-		plot-data-labels-format="<b>{point.name}</b>: {point.percentage:.1f}%">
-	</si-pie-chart>
-
+	<div class="row">
+		<si-pie-chart
+			id="test-result-chart-container"
+			title-text="Summary Test Report"
+			series="vm.pieChartSeries"
+			class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12"
+			tooltip-point-format="{series.name}: <b>{point.percentage:.1f}%</b>"
+			plot-data-labels-format="<b>{point.name}</b>: {point.percentage:.1f}%">
+		</si-pie-chart>
+	</div>
 	<hr>
 
 	<h3>Test Result Detailed Report</h3>
