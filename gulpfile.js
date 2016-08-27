@@ -270,6 +270,7 @@ gulp.task('optimize', ['inject'], function() {
 		// Replace the file names in the html with rev numbers
 		.pipe($.revReplace())
 		.pipe(gulp.dest(config.build));
+		
 });
 
 /**
