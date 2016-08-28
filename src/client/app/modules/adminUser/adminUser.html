@@ -1,112 +1,116 @@
-<h2>Welcome Back, {{vm.user.firstName}}!</h2>
-<hr>
-<div class="row">
-	<div class="col-sm-6">
-		<div class="panel panel-primary">
-			<div class="panel-heading">Generate a new plain Test</div>
-			<div class="panel-body">
-				<form class="form-inline">
-					<div class="form-group">
-						<input class="form-control" ng-model="vm.test.name" placeholder="Name">
-					</div>
-					<button type="button" class="btn btn-default" ng-click="vm.addTest()">Add a new Test!</button>
-				</form>
+<div class="container">
+	<div class="page-header">
+		<h1>Welcome Back, {{vm.user.firstName}}!</h1>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Generate a new plain Test</div>
+				<div class="panel-body">
+					<form class="form-inline">
+						<div class="form-group">
+							<input class="form-control" ng-model="vm.test.name" placeholder="Name">
+						</div>
+						<button type="button" class="btn btn-default" ng-click="vm.addTest()">Add a new Test!</button>
+					</form>
+				</div>
 			</div>
-		</div>
 
-		<div class="panel panel-primary">
-			<div class="panel-heading">Prepare a test for Candidate</div>
-			<div class="panel-body">
-				<form name="userForm">
-					<div class="form-group">
-						<input type="text" class="form-control" ng-model="vm.testName" placeholder="Test Name">
-					</div>
+			<div class="panel panel-primary">
+				<div class="panel-heading">Prepare a test for Candidate</div>
+				<div class="panel-body">
+					<form name="userForm">
+						<div class="form-group">
+							<input type="text" class="form-control" ng-model="vm.testName" placeholder="Test Name">
+						</div>
 
-					<div class="form-group hidden-sm hidden-md hidden-lg">
-						<input type="text" class="form-control" ng-model="vm.candidate.firstName" placeholder="First Name">
-					</div>
-					<div class="form-group hidden-sm hidden-md hidden-lg">
-						<input type="text" class="form-control" ng-model="vm.candidate.lastName" placeholder="Last Name">
-					</div>
+						<div class="form-group hidden-sm hidden-md hidden-lg">
+							<input type="text" class="form-control" ng-model="vm.candidate.firstName" placeholder="First Name">
+						</div>
+						<div class="form-group hidden-sm hidden-md hidden-lg">
+							<input type="text" class="form-control" ng-model="vm.candidate.lastName" placeholder="Last Name">
+						</div>
 
-					<div class="form-group hidden-xs">
-						<div class="row">
-							<div class="col-sm-6">
-								<input type="text" class="form-control" ng-model="vm.candidate.firstName" placeholder="First Name">
-							</div>
-							<div class="col-sm-6">
-								<input type="text" class="form-control" ng-model="vm.candidate.lastName" placeholder="Last Name">
+						<div class="form-group hidden-xs">
+							<div class="row">
+								<div class="col-sm-6">
+									<input type="text" class="form-control" ng-model="vm.candidate.firstName" placeholder="First Name">
+								</div>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" ng-model="vm.candidate.lastName" placeholder="Last Name">
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<div class="form-group">
-						<input type="email" class="form-control" ng-model="vm.candidate.email" placeholder="Email">
-					</div>
-					<div class="form-group">
-						<select class="form-control" ng-model="vm.candidate.testType" placeholder="Select test type">
-							<option value="">Select a test</option>
-							<option value="smart">Smart Test</option>
-							<option value="fixed">Fixed Test</option>
-						</select>
-					</div>
-					<div class="form-group" ng-if="vm.candidate.testType === 'smart'">
-						<tags-input ng-model="vm.candidate.primarySmartTags" placeholder="Tags ( java, angularjs etc. )"></tags-input>
-					</div>
-					<div class="form-group" ng-if="vm.candidate.testType === 'fixed'">
-						<select class="form-control" ng-model="vm.candidate.test" placeholder="Select a test">
-							<option value="">Select a test</option>
-							<option ng-repeat="test in vm.tests" value="{{test._id}}">
-								{{test.name}}
-							</option>
-						</select>
-					</div>
-					<button type="button" class="btn btn-default" ng-click="vm.createTestForCandidate()">Create a Test for Candidate</button>
-				</form>
+						<div class="form-group">
+							<input type="email" class="form-control" ng-model="vm.candidate.email" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<select class="form-control" ng-model="vm.candidate.testType" placeholder="Select test type">
+								<option value="">Select a test</option>
+								<option value="smart">Smart Test</option>
+								<option value="fixed">Fixed Test</option>
+							</select>
+						</div>
+						<div class="form-group" ng-if="vm.candidate.testType === 'smart'">
+							<tags-input ng-model="vm.candidate.primarySmartTags" placeholder="Tags ( java, angularjs etc. )"></tags-input>
+						</div>
+						<div class="form-group" ng-if="vm.candidate.testType === 'fixed'">
+							<select class="form-control" ng-model="vm.candidate.test" placeholder="Select a test">
+								<option value="">Select a test</option>
+								<option ng-repeat="test in vm.tests" value="{{test._id}}">
+									{{test.name}}
+								</option>
+							</select>
+						</div>
+						<button type="button" class="btn btn-default" ng-click="vm.createTestForCandidate()">Create a Test for Candidate</button>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-sm-6">
-		<div class="panel panel-primary">
-			<div class="panel-heading">Usertest Status</div>
-			<div class="panel-body">
-				<div ng-if="vm.userTests.length <= 0" class="alert alert-info margin-bottom0" role="alert">
-					No user test available.
-				</div>
-				<div class="table-responsive teststatus-table" ng-if="vm.userTests.length > 0">
-					<table class="table">
-						<thead>
-						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>Status</th>
-							<th></th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr ng-repeat="userTest in vm.userTests" ng-class="{'success' : userTest.isCompleted}">
-							<td>{{userTest.firstName}}</td>
-							<td>{{userTest.lastName}}</td>
-							<td>
-								<div ng-if="userTest.isCompleted">
+		<div class="col-sm-6">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Usertest Status</div>
+				<div class="panel-body">
+					<div ng-if="vm.userTests.length <= 0" class="alert alert-info margin-bottom0" role="alert">
+						No user test available.
+					</div>
+					<div class="table-responsive teststatus-table" ng-if="vm.userTests.length > 0">
+						<table class="table">
+							<thead>
+							<tr>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Status</th>
+								<th></th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr ng-repeat="userTest in vm.userTests" ng-class="{'success' : userTest.isCompleted}">
+								<td>{{userTest.firstName}}</td>
+								<td>{{userTest.lastName}}</td>
+								<td>
+									<div ng-if="userTest.isCompleted">
 									<span>
 										<i class="fa fa-check" aria-hidden="true"></i>
 									</span>
-									<span>
+										<span>
 										<button type="button" class="btn btn-default btn-xs" ng-click="vm.showTestReport(userTest._id)">
 											Show report
 										</button>
 									</span>
-								</div>
-							</td>
-							<td>
-								<button ng-click="vm.deleteTest(userTest._id)" class="btn btn-xs btn-danger">
-									<i class="fa fa-trash" aria-hidden="true"></i>
-								</button>
-							</td>
-						</tr>
-						</tbody>
-					</table>
+									</div>
+								</td>
+								<td>
+									<button ng-click="vm.deleteTest(userTest._id)" class="btn btn-xs btn-danger">
+										<i class="fa fa-trash" aria-hidden="true"></i>
+									</button>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

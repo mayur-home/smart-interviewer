@@ -1,55 +1,59 @@
-<h2>Select questions for <small>{{vm.testName}}</small></h2>
-<hr>
-<div class="row">
-	<div class="col-sm-6">
-		<input type="text" class="form-control" name="search" ng-model="vm.search" placeholder="Search question">
-		<span id="helpBlock" class="help-block">Type "Keyword", "Tag" or "Text" for search.</span>
-		<hr>
+<div class="container">
+	<div class="page-header">
+		<h1>Select questions for <small>{{vm.testName}}</small></h1>
+	</div>
 
-		<div class="search-result">
-			<div class="alert alert-warning" role="alert" ng-if="vm.searchedQuestions.length < 1">
-				No search result found
-			</div>
-			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="item in vm.searchedQuestions">
-					<p>{{item.question}}</p>
-					<p>
-						<small><b>Options:</b>
-							<span ng-repeat="ans in item.answer">
+	<div class="row">
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="search" ng-model="vm.search" placeholder="Search question">
+			<span id="helpBlock" class="help-block">Type "Keyword", "Tag" or "Text" for search.</span>
+			<hr>
+
+			<div class="search-result">
+				<div class="alert alert-warning" role="alert" ng-if="vm.searchedQuestions.length < 1">
+					No search result found
+				</div>
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="item in vm.searchedQuestions">
+						<p>{{item.question}}</p>
+						<p>
+							<small><b>Options:</b>
+								<span ng-repeat="ans in item.answer">
 							{{ans.answer}}
 							<i class="fa fa-check-square-o" ng-if="ans.isCorrect" aria-hidden="true"></i>
 							<i ng-if="!$last">,</i>
 						</span>
-						</small>
-					</p>
+							</small>
+						</p>
 
-					<button type="button" class="btn btn-success btn-xs" ng-click="vm.addQuestion(item._id)">Add</button>
-				</li>
-			</ul>
+						<button type="button" class="btn btn-success btn-xs" ng-click="vm.addQuestion(item._id)">Add</button>
+					</li>
+				</ul>
+			</div>
+
+			<nav ng-if="vm.pages > 1">
+				<ul class="pagination pagination-sm">
+					<li ng-if="vm.currentPage > 1">
+						<a aria-label="Previous" ng-click="vm.getQuestions(vm.currentPage - 1)"><span aria-hidden="true">«</span></a>
+					</li>
+					<li ng-repeat="n in range(1, vm.pages)" ng-class="{ 'active': vm.currentPage == n }">
+						<a ng-click="vm.getQuestions(n)">{{n}}</a>
+					</li>
+					<li ng-if="vm.currentPage < vm.pages">
+						<a aria-label="Next" ng-click="vm.getQuestions(vm.currentPage + 1)"><span aria-hidden="true">»</span></a>
+					</li>
+				</ul>
+			</nav>
 		</div>
-
-		<nav ng-if="vm.pages > 1">
-			<ul class="pagination pagination-sm">
-				<li ng-if="vm.currentPage > 1">
-					<a aria-label="Previous" ng-click="vm.getQuestions(vm.currentPage - 1)"><span aria-hidden="true">«</span></a>
-				</li>
-				<li ng-repeat="n in range(1, vm.pages)" ng-class="{ 'active': vm.currentPage == n }">
-					<a ng-click="vm.getQuestions(n)">{{n}}</a>
-				</li>
-				<li ng-if="vm.currentPage < vm.pages">
-					<a aria-label="Next" ng-click="vm.getQuestions(vm.currentPage + 1)"><span aria-hidden="true">»</span></a>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	<div class="col-sm-6">
-		<div class="added-question-list">
-			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="item in vm.questions">
-					<p>{{item.question}}</p>
-					<button type="button" class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(item._id)">Remove</button>
-				</li>
-			</ul>
+		<div class="col-sm-6">
+			<div class="added-question-list">
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="item in vm.questions">
+						<p>{{item.question}}</p>
+						<button type="button" class="btn btn-danger btn-xs" ng-click="vm.deleteQuestion(item._id)">Remove</button>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
