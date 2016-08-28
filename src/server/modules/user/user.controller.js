@@ -27,20 +27,33 @@ function create(req, res) {
 	console.log('called profile create');
 	req.body.activateToken = randtoken.generate(16);
 
-	User.create(req.body, function(err, user) {
+	User.findOne({email: req.body.email}, function(err, user) {
 		if (err) {
 			res.json(500, err);
 		}
-		// TODO - Need to convert this fixed text to template.
-		var mailBody = 'Hello ' + user.firstName + ', <br/><br/>';
-		mailBody += 'You have successfully registered with Smart Interviewer.!<br/>';
-		mailBody += 'Please click on below link to activate your account<br/>';
-		mailBody += 'Link: ' + req.headers.origin + '/activateUser/' + user.activateToken;
-		mailBody += '<br/> <br/>';
-		mailBody += 'Thanks & Regards,<br/>';
-		mailBody += 'Smart Interviewer Team<br/>';
-		mailUtils.sendMail('', user.email, 'Congratulations! Registered Successfully.', mailBody, true);
-		res.json(user);
+
+		if (user) {
+			res.json(400, {
+				code: 'EMAIL_ALREADY_REGISTERED',
+				message: 'This email is already registered. Please try login.'
+			});
+		} else {
+			User.create(req.body, function(err, user) {
+				if (err) {
+					res.json(500, err);
+				}
+				// TODO - Need to convert this fixed text to template.
+				var mailBody = 'Hello ' + user.firstName + ', <br/><br/>';
+				mailBody += 'You have successfully registered with Smart Interviewer.!<br/>';
+				mailBody += 'Please click on below link to activate your account<br/>';
+				mailBody += 'Link: ' + req.headers.origin + '/activateUser/' + user.activateToken;
+				mailBody += '<br/> <br/>';
+				mailBody += 'Thanks & Regards,<br/>';
+				mailBody += 'Smart Interviewer Team<br/>';
+				mailUtils.sendMail('', user.email, 'Congratulations! Registered Successfully.', mailBody, true);
+				res.json(user);
+			});
+		}
 	});
 }
 

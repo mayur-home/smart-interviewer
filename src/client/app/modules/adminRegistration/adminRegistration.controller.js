@@ -30,6 +30,11 @@
 
 			function profileCreateFailure(err) {
 				logger.error(err);
+
+				vm.errorMessage = err.data.message;
+				if (err.data.code === 'EMAIL_ALREADY_REGISTERED') {
+					angular.element('.login').trigger('focus');
+				}
 			}
 		}
 	}
