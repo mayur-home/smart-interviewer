@@ -68,8 +68,8 @@ function verifyOTP(req, res) {
 
 		if (userOTP) {
 			// Need to de-activated that otp so it cannot use again.
-			userOTP.isActive = false;
-			userOTP.save();
+			// userOTP.isActive = false;
+			// userOTP.save();
 			res.json({success: true});
 		} else {
 			res.json({success: false});

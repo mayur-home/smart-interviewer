@@ -2,6 +2,7 @@ var User = require('./user.schema');
 var Usertest = require('../userTest/userTest.schema');
 var mailUtils = require('../../utils/mail.utils');
 var randtoken = require('rand-token');
+var UserOTP = require('../userOTP/userOTP.schema');
 
 module.exports = {
 	getAll: getAll,
@@ -9,7 +10,8 @@ module.exports = {
 	addTest: addTest,
 	getAllTests: getAllTests,
 	getTestReport: getTestReport,
-	activateUser: activateUser
+	activateUser: activateUser,
+	resetPassword: resetPassword
 };
 
 //////////////////////////
@@ -115,5 +117,58 @@ function getTestReport(req, res) {
 			}
 			res.json(test);
 		});
+	});
+}
+
+function resetPassword(req, res) {
+	UserOTP.findOne({email: req.body.email, otp: req.body.otp, isActive: true}, function(err, userOTP) {
+		if (err) {
+			res.status(500)
+				.json({
+					error: 'SYSTEM_ERROR',
+					message: 'System is unable to process your request.'
+				});
+			return;
+		}
+
+		if (userOTP) {
+			User.findOne({email: userOTP.email}, function(error, user) {
+				if (error) {
+					res.status(500)
+						.json({
+							error: 'SYSTEM_ERROR',
+							message: 'System is unable to process your request.'
+						});
+					return;
+				}
+
+				if (user) {
+					// updating active flag as OTP is not longer in use..
+					userOTP.isActive = false;
+					userOTP.save();
+
+					// updating password..
+					user.password = req.body.newPassword;
+					user.save();
+
+					var mailBody = 'Hello ' + user.firstName + ', <br/><br/>';
+					mailBody += 'Your password has been changed successfully!<br/>';
+					mailBody += 'Please try login to system using new password.<br/>';
+					mailBody += '<br/> <br/>';
+					mailBody += 'Thanks & Regards,<br/>';
+					mailBody += 'Smart Interviewer Team<br/>';
+					mailUtils.sendMail('', user.email, 'Password Reset Successfully!', mailBody, true);
+
+					res.json({
+						success: true
+					});
+				}
+			});
+		} else {
+			res.status(404).json({
+				error: 'OTP_EXPIRED',
+				message: 'OTP which you are using that may be expired.'
+			});
+		}
 	});
 }
