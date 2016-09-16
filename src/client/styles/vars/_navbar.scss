@@ -1,11 +1,17 @@
 // misc. color;
-$nav-bar-misc-color: #B2DFDB; // border and hover colors.
+$nav-bar-misc-color: #DEDEDE; // border and hover colors.
 
 // overriding navbar variables.
-$navbar-inverse-color: $application-brand-color; // overriding navbar inverse color
-$navbar-inverse-bg: $application-brand-color; // overriding navbar inverse bg
-$navbar-inverse-link-color: white;
-$navbar-inverse-brand-hover-color: $nav-bar-misc-color;
-$navbar-inverse-border: $brand-primary-dark;
+$navbar-inverse-color: #fff; // overriding navbar inverse color
+$navbar-inverse-bg: #fff; // overriding navbar inverse bg
+$navbar-inverse-link-color: #F79E1B;
+$navbar-inverse-brand-hover-color: #F79E1B;
+// $navbar-inverse-border: $brand-primary-dark;
 $navbar-inverse-toggle-border-color: $nav-bar-misc-color;
 $navbar-inverse-toggle-hover-bg: $nav-bar-misc-color;
+
+.navbar-brand-logo {
+	float: right;
+	height: 40px;
+	width: 250px;
+}

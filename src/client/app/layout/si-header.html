@@ -1,36 +1,30 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#si-navbar" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" ui-sref="home">Smart Interviewer</a>
-		</div>
-		<div class="collapse navbar-collapse" id="si-navbar" ng-if="vm.user">
-			<ul class="nav navbar-nav">
-				<li ui-sref-active="active">
-					<a ui-sref="adminQuestion" >Add Questions</a>
-				</li>
-				<li ui-sref-active="active">
-					<a ui-sref="adminUser" >Dashboard</a>
-				</li>
-			</ul>
-			<ul ng-if="vm.user" class="nav navbar-nav navbar-right">
-				<li>
-					<a>
-						<b>{{vm.user}}</b>
-					</a>
-				</li>
-				<li>
-					<a href="#" ng-click="vm.logout()">
-						Logout
-					</a>
-				</li>
-			</ul>
-		</div>
+		<img class="navbar-header">
+			<strong><a class="navbar-brand" ui-sref="home">Smart Interviewer</a></strong>
+			<img class="visible-lg visible-md visible-sm align-right" src="../../images/mastercard_logo.png"/>
+			<img class="visible-xs align-right" src="../../images/mastercard_logo_sm.png"/>
+	</div>
+	<div class="collapse navbar-collapse" id="si-navbar" ng-if="vm.user">
+		<ul class="nav navbar-nav">
+			<li ui-sref-active="active">
+				<a ui-sref="adminQuestion" >Add Questions</a>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-sref="adminUser" >Dashboard</a>
+			</li>
+		</ul>
+		<ul ng-if="vm.user" class="nav navbar-nav navbar-right">
+			<li>
+				<a>
+					<b>{{vm.user}}</b>
+				</a>
+			</li>
+			<li>
+				<a href="#" ng-click="vm.logout()">
+					Logout
+				</a>
+			</li>
+		</ul>
 	</div>
 </nav>

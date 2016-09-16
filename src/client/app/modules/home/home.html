@@ -1,5 +1,7 @@
-<div class="jumbotron">
-	<h1>Hello, {{vm.user.firstName}}!</h1>
-	<h3>Welcome to Smart Interviewer, App that makes your life easier.! ;)</h3>
-	<a ng-if="!vm.user" type="button" class="btn btn-primary btn-lg" ui-sref="adminLogin">Log In</a>
+<div class="img-holder row">
+	<img src="../../images/interview.jpg" alt="image" class="img-responsive"/>
+	<strong><a ng-if="!vm.user" type="button" class="link navbar-brand visible-lg visible-md visible-sm hidden-xs" ui-sref="adminLogin">Begin Test</a></strong>
+</div>
+<div class="row visible-xs">
+	<strong><a ng-if="!vm.user" type="button" class="btn btn-primary col-xs-12 begin-test navbar-brand" ui-sref="adminLogin">Begin Test</a></strong>
 </div>

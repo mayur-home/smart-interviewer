@@ -1,2 +1,29 @@
 // body specific variables.
 $application-body-padding-top: 70px; // used for applying padding to body.
+$brand-bg-color: #FFF;
+
+.img-holder {
+	position: absolute;
+}
+
+.img-holder .link {
+	position: absolute;
+	bottom: 10px; /*your button position*/
+	right: 10px; /*your button position*/
+}
+
+.align-right {
+	float: right;
+}
+
+.begin-test {
+	text-align: center;
+	cursor: pointer;
+	border: 1px solid transparent;
+	padding: 12px 16px;
+	line-height: 1.42857;
+	border-radius: 4px;
+	position: fixed;
+	bottom: 0;
+	margin-bottom: 25px;
+}
